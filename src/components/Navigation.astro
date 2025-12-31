@@ -1,0 +1,304 @@
+---
+const navLinks = [
+  { href: '#about', label: 'About' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="#" class="logo">
+      <span class="logo-bracket">&lt;</span>
+      <span class="logo-text">JMC</span>
+      <span class="logo-bracket">/&gt;</span>
+    </a>
+
+    <div class="nav-links">
+      {navLinks.map(link => (
+        <a href={link.href} class="nav-link">{link.label}</a>
+      ))}
+      <a href="https://jeong-min-cho.github.io/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+        Blog
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    </div>
+
+    <a href="#contact" class="btn btn-primary nav-cta">
+      Let's Talk
+    </a>
+
+    <button class="mobile-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <div class="mobile-menu-content">
+    {navLinks.map(link => (
+      <a href={link.href} class="mobile-link">{link.label}</a>
+    ))}
+    <a href="https://jeong-min-cho.github.io/" target="_blank" rel="noopener noreferrer" class="mobile-link external">
+      Blog
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+      </svg>
+    </a>
+    <a href="#contact" class="btn btn-primary mobile-cta">Let's Talk</a>
+  </div>
+</div>
+
+<script>
+  const toggle = document.querySelector('.mobile-toggle');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-cta');
+
+  toggle?.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    mobileMenu?.classList.toggle('active');
+    document.body.style.overflow = mobileMenu?.classList.contains('active') ? 'hidden' : '';
+  });
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      toggle?.classList.remove('active');
+      mobileMenu?.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Nav background on scroll
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav');
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 100) {
+      nav?.classList.add('scrolled');
+    } else {
+      nav?.classList.remove('scrolled');
+    }
+
+    if (currentScroll > lastScroll && currentScroll > 500) {
+      nav?.classList.add('hidden');
+    } else {
+      nav?.classList.remove('hidden');
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.25rem 0;
+    transition: all 0.3s ease;
+  }
+
+  .nav.scrolled {
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+  }
+
+  .nav.hidden {
+    transform: translateY(-100%);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-bracket {
+    color: var(--accent-primary);
+  }
+
+  .logo-text {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link.external {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .nav-link.external svg {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-link.external:hover svg {
+    opacity: 1;
+  }
+
+  .nav-cta {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 101;
+  }
+
+  .mobile-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  .mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 15, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .mobile-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .mobile-link.external {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .mobile-cta {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta {
+      display: none;
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .nav-container {
+      padding: 0 1.25rem;
+    }
+  }
+</style>

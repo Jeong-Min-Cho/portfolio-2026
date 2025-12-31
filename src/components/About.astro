@@ -1,0 +1,230 @@
+---
+const stats = [
+  { value: '3+', label: 'Years Experience' },
+  { value: '4', label: 'Companies' },
+  { value: '3.8', label: 'GPA' },
+  { value: '15+', label: 'Technologies' },
+];
+---
+
+<section class="section about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image reveal">
+        <div class="image-wrapper">
+          <img src="/my-photo.jpg" alt="Jeong Min Cho" class="profile-photo" />
+          <div class="image-border"></div>
+          <div class="image-dots">
+            {Array.from({ length: 64 }).map(() => (
+              <span class="dot"></span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <span class="section-label reveal mono">&lt;about&gt;</span>
+        <h2 class="section-title reveal reveal-delay-1">
+          Building Scalable Solutions
+        </h2>
+        <p class="about-text reveal reveal-delay-2">
+          I'm a Fullstack Software Engineer based in Seoul, South Korea, with 3+ years
+          of experience building scalable web applications. I specialize in React, Next.js,
+          Java, and Python, working across both enterprise and startup environments.
+        </p>
+        <p class="about-text reveal reveal-delay-3">
+          I graduated Magna Cum Laude from George Mason University with a BS in Computer
+          Science. My experience spans from building dashboard features at ScienceLogic
+          to developing fullstack SaaS platforms with secure authentication systems.
+        </p>
+        <p class="about-text reveal reveal-delay-4">
+          I'm passionate about clean architecture, CI/CD automation, and building
+          products that solve real problems. Whether it's designing RESTful APIs,
+          containerizing services with Docker, or crafting responsive UIs, I focus
+          on delivering high-quality, maintainable code.
+        </p>
+
+        <div class="about-stats reveal">
+          {stats.map((stat, index) => (
+            <div class="stat-item" style={`--delay: ${index * 0.1}s`}>
+              <span class="stat-value gradient-text">{stat.value}</span>
+              <span class="stat-label">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="about-cta reveal">
+          <a href="/resume/Jeong_Min_Cho_Resume.pdf" class="btn btn-primary" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download Resume</span>
+          </a>
+        </div>
+
+        <span class="section-label-end reveal mono">&lt;/about&gt;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.03), transparent);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-image {
+    position: relative;
+  }
+
+  .image-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+  }
+
+  .profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .image-border {
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border-radius: 25px;
+    z-index: 1;
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+
+  .image-dots {
+    position: absolute;
+    bottom: -2rem;
+    right: -2rem;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+    z-index: 0;
+  }
+
+  .image-dots .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+
+  .about-content {
+    position: relative;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .section-label-end {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    margin-top: 2rem;
+    opacity: 0.8;
+  }
+
+  .about-text {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+  }
+
+  .stat-item {
+    text-align: center;
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+
+  .about-stats.revealed .stat-item {
+    opacity: 1;
+  }
+
+  .stat-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .about-cta {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .about-image {
+      max-width: 350px;
+      margin: 0 auto;
+    }
+
+    .image-dots {
+      display: none;
+    }
+
+    .about-stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about-stats {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+    }
+  }
+</style>

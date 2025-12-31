@@ -1,0 +1,368 @@
+---
+const projects = [
+  {
+    title: 'SDLC Landing Page',
+    description: 'A modern, responsive landing page built for a client. Features smooth animations, clean design, and optimized performance for lead generation.',
+    image: '/projects/sdlc.png',
+    tags: ['Next.js', 'React', 'Tailwind CSS', 'Client Work'],
+    liveUrl: 'https://sdlc-landing-page.vercel.app/',
+    featured: true,
+  },
+  {
+    title: 'BDO Korean Patcher',
+    description: 'A desktop application for installing Korean language patches for Black Desert Online. Features font installation, patch management, and a user-friendly installer interface.',
+    image: '/projects/bdo-korean.png',
+    tags: ['C#', '.NET', 'WinForms', 'Desktop App'],
+    githubUrl: 'https://github.com/Jeong-Min-Cho/BDOKR-Patcher-Source',
+    featured: true,
+  },
+  {
+    title: 'Love Letter',
+    description: 'An interactive and fun web experience built with vanilla technologies. Features playful animations and engaging interactions without any framework overhead.',
+    image: '/projects/love-letter.png',
+    tags: ['HTML', 'JavaScript', 'Tailwind CSS'],
+    liveUrl: 'https://sofi-jeongmin.vercel.app/',
+    featured: true,
+  },
+  {
+    title: 'Rate My GMU Professors',
+    description: 'A platform for George Mason University students to discover and rate professors. Search, filter, and share reviews to help fellow students make informed course decisions.',
+    image: '/projects/rate-my-gmu-professor.png',
+    tags: ['Web', 'React', 'Full Stack', 'Education'],
+    liveUrl: 'https://rate-my-gmu-professor-web.vercel.app/',
+    githubUrl: 'https://github.com/Jeong-Min-Cho/Rate-My-GMU-Professors',
+    featured: true,
+  },
+  {
+    title: 'Unicode Encoder Decoder',
+    description: 'A web utility for encoding and decoding Unicode characters, built to showcase the unicode-escaper npm package. Convert text to various Unicode formats with an intuitive interface.',
+    image: '/projects/unicode.png',
+    tags: ['SolidJS', 'TypeScript', 'NPM Package'],
+    liveUrl: 'https://unicode-encoder-decoder-web.vercel.app/',
+    githubUrl: 'https://github.com/Jeong-Min-Cho/unicode-encoder-decoder-web',
+    featured: true,
+  },
+  {
+    title: 'unicode-escaper',
+    description: 'A lightweight npm package for encoding and decoding Unicode escape sequences. Supports multiple formats including \\uXXXX, \\u{X}, \\xNN, HTML entities, and U+XXXX notation.',
+    tags: ['NPM', 'TypeScript', 'Unicode', 'Utility'],
+    npmUrl: 'https://www.npmjs.com/package/unicode-escaper',
+    githubUrl: 'https://github.com/Jeong-Min-Cho/unicode-escaper',
+    featured: false,
+  },
+  {
+    title: 'is-thenable',
+    description: 'A tiny, zero-dependency npm package to check if a value is thenable (Promise-like). Useful for handling both Promises and synchronous values in async code.',
+    tags: ['NPM', 'TypeScript', 'Promise', 'Utility'],
+    npmUrl: 'https://www.npmjs.com/package/is-thenable',
+    githubUrl: 'https://github.com/Jeong-Min-Cho/is-thenable',
+    featured: false,
+  },
+  {
+    title: 'is-cron',
+    description: 'A lightweight npm package for validating cron expressions. Check if a string is a valid cron schedule with support for standard and extended cron syntax.',
+    tags: ['NPM', 'TypeScript', 'Cron', 'Validation'],
+    npmUrl: 'https://www.npmjs.com/package/is-cron',
+    githubUrl: 'https://github.com/Jeong-Min-Cho/is-cron',
+    featured: false,
+  },
+];
+
+const featuredProjects = projects.filter(p => p.featured);
+const otherProjects = projects.filter(p => !p.featured);
+---
+
+<section class="section projects" id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label mono">&lt;projects&gt;</span>
+      <h2 class="section-title">Featured Work</h2>
+      <p class="section-subtitle">
+        A selection of projects I've worked on, showcasing my skills and expertise
+      </p>
+    </div>
+
+    <div class="featured-projects">
+      {featuredProjects.map((project, index) => (
+        <article class={`project-card featured glass-card reveal reveal-delay-${index + 1}`}>
+          <div class="project-image">
+            <img src={project.image} alt={project.title} class="project-screenshot" />
+            <div class="project-overlay">
+              <div class="overlay-content">
+                {project.liveUrl && (
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="overlay-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    <span>Live Demo</span>
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="overlay-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span>Source</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-description">{project.description}</p>
+            <div class="project-tags">
+              {project.tags.map(tag => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {otherProjects.length > 0 && (
+      <>
+        <h3 class="other-title reveal">NPM Packages</h3>
+
+        <div class="other-projects">
+          {otherProjects.map((project, index) => (
+            <article class={`project-card small glass-card reveal reveal-delay-${index + 1}`}>
+              <div class="project-header">
+                <div class="npm-icon">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M0 7.334v8h6.666v1.332H12v-1.332h12v-8H0zm6.666 6.664H5.334v-4H3.999v4H1.335V8.667h5.331v5.331zm4 0v1.336H8.001V8.667h5.334v5.332h-2.669v-.001zm12.001 0h-1.33v-4h-1.336v4h-1.335v-4h-1.33v4h-2.671V8.667h8.002v5.331zM10.665 10H12v2.667h-1.335V10z"/>
+                  </svg>
+                </div>
+                <div class="project-links">
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                  </a>
+                  <a href={project.npmUrl} target="_blank" rel="noopener noreferrer" aria-label="NPM Package">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h3 class="project-title mono">{project.title}</h3>
+              <p class="project-description">{project.description}</p>
+              <div class="project-tags">
+                {project.tags.map(tag => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </>
+    )}
+
+    <span class="section-label-end reveal mono">&lt;/projects&gt;</span>
+  </div>
+</section>
+
+<style>
+  .projects {
+    background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.03), transparent);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .section-label-end {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    margin-top: 4rem;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  .featured-projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .project-card {
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .project-card.featured {
+    padding: 0;
+  }
+
+  .project-image {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+  }
+
+  .project-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s ease;
+  }
+
+  .project-card:hover .project-screenshot {
+    transform: scale(1.05);
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 15, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .overlay-content {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .overlay-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  .overlay-btn:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+  }
+
+  .project-content {
+    padding: 1.5rem;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .project-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    padding: 0.25rem 0.75rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .other-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+  }
+
+  .other-projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card.small {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .npm-icon {
+    color: #CB3837;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .project-links a {
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+  }
+
+  .project-links a:hover {
+    color: var(--accent-primary);
+  }
+
+  .project-card.small .project-title {
+    margin-bottom: 1rem;
+  }
+
+  .project-card.small .project-description {
+    flex-grow: 1;
+  }
+
+  @media (max-width: 768px) {
+    .featured-projects {
+      grid-template-columns: 1fr;
+    }
+
+    .other-projects {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

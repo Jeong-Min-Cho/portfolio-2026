@@ -1,0 +1,397 @@
+---
+const experiences = [
+  {
+    title: 'Founder & Fullstack Software Engineer',
+    company: 'Self-Employed',
+    location: 'South Korea',
+    period: 'Nov 2025 - Present',
+    description: 'Building a fullstack SaaS platform with secure authentication and desktop client application.',
+    highlights: [
+      'Built fullstack SaaS platform with Next.js 14, TypeScript frontend backed by FastAPI and PostgreSQL',
+      'Developed secure license management system with HWID binding, JWT authentication, and AES-256 encryption',
+      'Created Windows desktop client in C++17 with ImGui, featuring auto-updates and server-based authentication',
+      'Integrated third-party APIs including Telegram Bot for notifications and OCR services for text recognition',
+    ],
+    technologies: ['Next.js', 'TypeScript', 'FastAPI', 'PostgreSQL', 'C++', 'Docker'],
+  },
+  {
+    title: 'Network Management and Operations Specialist',
+    company: 'Republic of Korea Army',
+    location: 'South Korea',
+    period: 'May 2024 - Nov 2025',
+    description: 'Maintained and secured intranet infrastructure supporting mission-critical military operations.',
+    highlights: [
+      'Maintained and secured intranet infrastructure supporting 1,000+ personnel with 99%+ uptime',
+      'Implemented security protocols and conducted regular system audits for classified communications',
+      'Troubleshot and resolved network issues under time-sensitive conditions',
+    ],
+    technologies: ['Network Security', 'System Administration', 'Infrastructure'],
+  },
+  {
+    title: 'Fullstack Software Engineer',
+    company: 'Software Development Logistics Consulting',
+    location: 'Catonsville, Maryland',
+    period: 'Jul 2023 - Apr 2024',
+    description: 'Returned to lead development of enterprise applications with expanded responsibilities.',
+    highlights: [
+      'Led frontend development with React, building reusable components and implementing state management',
+      'Developed and maintained RESTful APIs using Java and Spring Boot for enterprise client applications',
+      'Deployed and managed applications on AWS using EC2, S3, and RDS for scalability',
+      'Automated build and deployment pipelines with Jenkins and Docker, streamlining CI/CD workflow',
+      'Collaborated with cross-functional teams in an Agile environment to deliver features on schedule',
+    ],
+    technologies: ['React', 'Java', 'Spring Boot', 'AWS', 'Jenkins', 'Docker'],
+  },
+  {
+    title: 'Software Engineer',
+    company: 'ScienceLogic Inc',
+    location: 'Reston, Virginia',
+    period: 'Nov 2022 - Jun 2023',
+    description: 'Built and enhanced dashboard features for enterprise monitoring platform.',
+    highlights: [
+      'Built and enhanced dashboard features using Next.js, React, and GraphQL',
+      'Wrote unit and integration tests improving code reliability and reducing regression issues',
+      'Maintained legacy PHP systems while supporting containerized deployments with Docker',
+      'Identified and resolved bugs across the dashboard, improving UX and system stability',
+    ],
+    technologies: ['Next.js', 'React', 'GraphQL', 'PHP', 'Docker'],
+  },
+  {
+    title: 'Junior Software Engineer',
+    company: 'Software Development Logistics Consulting',
+    location: 'Catonsville, Maryland',
+    period: 'Jan 2022 - Oct 2022',
+    description: 'First tenure developing responsive user interfaces and backend APIs for enterprise clients.',
+    highlights: [
+      'Developed responsive user interfaces with React.js and JavaScript, improving usability and performance',
+      'Designed and built RESTful APIs using Java and Spring Boot for seamless frontend-backend communication',
+    ],
+    technologies: ['React', 'JavaScript', 'Java', 'Spring Boot'],
+  },
+];
+
+const education = [
+  {
+    degree: 'Bachelor of Science in Computer Science',
+    school: 'George Mason University',
+    period: '2017 - 2021',
+    description: "GPA: 3.8/4.0 - Dean's List | Graduated Magna Cum Laude",
+  },
+];
+---
+
+<section class="section experience" id="experience">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label mono">&lt;experience&gt;</span>
+      <h2 class="section-title">Work Experience</h2>
+      <p class="section-subtitle">
+        My professional journey and the companies I've worked with
+      </p>
+    </div>
+
+    <div class="timeline">
+      {experiences.map((exp, index) => (
+        <div class={`timeline-item reveal reveal-delay-${index + 1}`}>
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line"></div>
+          </div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-header">
+              <div>
+                <h3 class="job-title">{exp.title}</h3>
+                <div class="company-info">
+                  <span class="company-name gradient-text">{exp.company}</span>
+                  <span class="divider">•</span>
+                  <span class="location">{exp.location}</span>
+                </div>
+              </div>
+              <span class="period mono">{exp.period}</span>
+            </div>
+            <p class="job-description">{exp.description}</p>
+            <ul class="highlights">
+              {exp.highlights.map(highlight => (
+                <li>{highlight}</li>
+              ))}
+            </ul>
+            <div class="tech-used">
+              {exp.technologies.map(tech => (
+                <span class="tech-badge">{tech}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="education-section reveal">
+      <h3 class="subsection-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+          <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
+        </svg>
+        Education
+      </h3>
+      {education.map(edu => (
+        <div class="education-card glass-card">
+          <div class="education-header">
+            <div>
+              <h4 class="degree">{edu.degree}</h4>
+              <span class="school">{edu.school}</span>
+            </div>
+            <span class="period mono">{edu.period}</span>
+          </div>
+          <p class="education-desc">{edu.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <span class="section-label-end reveal mono">&lt;/experience&gt;</span>
+  </div>
+</section>
+
+<style>
+  .experience {
+    background: linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.03), transparent);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .section-label-end {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    margin-top: 4rem;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto 4rem;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .marker-dot {
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--glow);
+    position: relative;
+    z-index: 2;
+  }
+
+  .marker-dot::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--accent-primary);
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+
+  .marker-line {
+    width: 2px;
+    flex-grow: 1;
+    background: linear-gradient(180deg, var(--accent-primary), transparent);
+    margin-top: 0.5rem;
+  }
+
+  .timeline-item:last-child .marker-line {
+    display: none;
+  }
+
+  .timeline-content {
+    padding: 2rem;
+    flex-grow: 1;
+  }
+
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .job-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .company-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .company-name {
+    font-weight: 500;
+  }
+
+  .divider {
+    color: var(--text-muted);
+  }
+
+  .location {
+    color: var(--text-muted);
+  }
+
+  .period {
+    padding: 0.375rem 0.875rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+    white-space: nowrap;
+  }
+
+  .job-description {
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+
+  .highlights {
+    list-style: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlights li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .highlights li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+  }
+
+  .tech-used {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-badge {
+    padding: 0.25rem 0.75rem;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .education-section {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .subsection-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .subsection-title svg {
+    color: var(--accent-primary);
+  }
+
+  .education-card {
+    padding: 1.5rem 2rem;
+  }
+
+  .education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .degree {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .school {
+    color: var(--accent-primary);
+    font-size: 0.95rem;
+  }
+
+  .education-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-item {
+      gap: 1rem;
+    }
+
+    .timeline-content {
+      padding: 1.5rem;
+    }
+
+    .timeline-header {
+      flex-direction: column;
+    }
+
+    .marker-dot {
+      width: 12px;
+      height: 12px;
+    }
+
+    .education-card {
+      padding: 1.5rem;
+    }
+  }
+</style>
