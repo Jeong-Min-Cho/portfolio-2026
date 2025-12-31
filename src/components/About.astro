@@ -1,9 +1,9 @@
 ---
 const stats = [
-  { value: '3+', label: 'Years Experience' },
-  { value: '4', label: 'Companies' },
-  { value: '3.8', label: 'GPA' },
-  { value: '15+', label: 'Technologies' },
+  { value: '3+', labelKey: 'about.stats.experience', label: 'Years Experience' },
+  { value: '4', labelKey: 'about.stats.companies', label: 'Companies' },
+  { value: '3.8', labelKey: 'about.stats.gpa', label: 'GPA' },
+  { value: '15+', labelKey: 'about.stats.technologies', label: 'Technologies' },
 ];
 ---
 
@@ -24,20 +24,20 @@ const stats = [
 
       <div class="about-content">
         <span class="section-label reveal mono">&lt;about&gt;</span>
-        <h2 class="section-title reveal reveal-delay-1">
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="about.title">
           Building Scalable Solutions
         </h2>
-        <p class="about-text reveal reveal-delay-2">
+        <p class="about-text reveal reveal-delay-2" data-i18n="about.paragraph1">
           I'm a Fullstack Software Engineer based in Seoul, South Korea, with 3+ years
           of experience building scalable web applications. I specialize in React, Next.js,
           Java, and Python, working across both enterprise and startup environments.
         </p>
-        <p class="about-text reveal reveal-delay-3">
+        <p class="about-text reveal reveal-delay-3" data-i18n="about.paragraph2">
           I graduated Magna Cum Laude from George Mason University with a BS in Computer
           Science. My experience spans from building dashboard features at ScienceLogic
           to developing fullstack SaaS platforms with secure authentication systems.
         </p>
-        <p class="about-text reveal reveal-delay-4">
+        <p class="about-text reveal reveal-delay-4" data-i18n="about.paragraph3">
           I'm passionate about clean architecture, CI/CD automation, and building
           products that solve real problems. Whether it's designing RESTful APIs,
           containerizing services with Docker, or crafting responsive UIs, I focus
@@ -48,19 +48,19 @@ const stats = [
           {stats.map((stat, index) => (
             <div class="stat-item" style={`--delay: ${index * 0.1}s`}>
               <span class="stat-value gradient-text">{stat.value}</span>
-              <span class="stat-label">{stat.label}</span>
+              <span class="stat-label" data-i18n={stat.labelKey}>{stat.label}</span>
             </div>
           ))}
         </div>
 
         <div class="about-cta reveal">
-          <a href="/resume/Jeong_Min_Cho_Resume.pdf" class="btn btn-primary" target="_blank">
+          <a href="/resume/Jeong_Min_Cho_resume.pdf" class="btn btn-primary" target="_blank">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            <span>Download Resume</span>
+            <span data-i18n="about.downloadResume">Download Resume</span>
           </a>
         </div>
 

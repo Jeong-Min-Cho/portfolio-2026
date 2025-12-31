@@ -2,19 +2,24 @@
 const contactInfo = [
   {
     icon: 'mail',
+    labelKey: 'contact.info.email.label',
     label: 'Email',
     value: 'jeongmincho@outlook.com',
     href: 'mailto:jeongmincho@outlook.com',
   },
   {
     icon: 'location',
+    labelKey: 'contact.info.location.label',
     label: 'Location',
+    valueKey: 'contact.info.location.value',
     value: 'Seoul, South Korea',
     href: null,
   },
   {
     icon: 'calendar',
+    labelKey: 'contact.info.availability.label',
     label: 'Availability',
+    valueKey: 'contact.info.availability.value',
     value: 'Open to opportunities',
     href: null,
   },
@@ -31,16 +36,16 @@ const socialLinks = [
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label mono">&lt;contact&gt;</span>
-      <h2 class="section-title">Let's Work Together</h2>
-      <p class="section-subtitle">
+      <h2 class="section-title" data-i18n="contact.title">Let's Work Together</h2>
+      <p class="section-subtitle" data-i18n="contact.subtitle">
         Have a project in mind? Let's discuss how we can collaborate
       </p>
     </div>
 
     <div class="contact-grid">
       <div class="contact-info reveal">
-        <h3 class="info-title">Get in Touch</h3>
-        <p class="info-desc">
+        <h3 class="info-title" data-i18n="contact.getInTouch">Get in Touch</h3>
+        <p class="info-desc" data-i18n="contact.description">
           I'm always interested in hearing about new projects and opportunities.
           Whether you have a question or just want to say hi, I'll get back to you!
         </p>
@@ -71,11 +76,11 @@ const socialLinks = [
                 )}
               </div>
               <div class="info-content">
-                <span class="info-label">{item.label}</span>
+                <span class="info-label" data-i18n={item.labelKey}>{item.label}</span>
                 {item.href ? (
                   <a href={item.href} class="info-value">{item.value}</a>
                 ) : (
-                  <span class="info-value">{item.value}</span>
+                  <span class="info-value" data-i18n={item.valueKey}>{item.value}</span>
                 )}
               </div>
             </div>
@@ -83,7 +88,7 @@ const socialLinks = [
         </div>
 
         <div class="social-links">
-          <span class="social-label">Connect with me</span>
+          <span class="social-label" data-i18n="contact.connectWithMe">Connect with me</span>
           <div class="social-icons">
             {socialLinks.map(link => (
               <a href={link.href} target="_blank" rel="noopener noreferrer" class="social-link" aria-label={link.label}>
@@ -116,23 +121,23 @@ const socialLinks = [
 
       <form class="contact-form glass-card reveal reveal-delay-1" id="contactForm">
         <div class="form-group">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required />
+          <label for="name" class="form-label" data-i18n="contact.form.name">Name</label>
+          <input type="text" id="name" name="name" class="form-input" data-i18n="contact.form.namePlaceholder" placeholder="John Doe" required />
         </div>
         <div class="form-group">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required />
+          <label for="email" class="form-label" data-i18n="contact.form.email">Email</label>
+          <input type="email" id="email" name="email" class="form-input" data-i18n="contact.form.emailPlaceholder" placeholder="john@example.com" required />
         </div>
         <div class="form-group">
-          <label for="subject" class="form-label">Subject</label>
-          <input type="text" id="subject" name="subject" class="form-input" placeholder="Project Inquiry" required />
+          <label for="subject" class="form-label" data-i18n="contact.form.subject">Subject</label>
+          <input type="text" id="subject" name="subject" class="form-input" data-i18n="contact.form.subjectPlaceholder" placeholder="Project Inquiry" required />
         </div>
         <div class="form-group">
-          <label for="message" class="form-label">Message</label>
-          <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tell me about your project..." rows="5" required></textarea>
+          <label for="message" class="form-label" data-i18n="contact.form.message">Message</label>
+          <textarea id="message" name="message" class="form-input form-textarea" data-i18n="contact.form.messagePlaceholder" placeholder="Tell me about your project..." rows="5" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary form-submit">
-          <span>Send Message</span>
+          <span data-i18n="contact.form.send">Send Message</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="22" y1="2" x2="11" y2="13"></line>
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -153,10 +158,10 @@ const socialLinks = [
         <span class="logo-text">JMC</span>
         <span class="logo-bracket">/&gt;</span>
       </div>
-      <p class="footer-text">
+      <p class="footer-text" data-i18n="contact.footer.text">
         Designed & Built with passion
       </p>
-      <p class="footer-copyright">
+      <p class="footer-copyright" data-i18n="contact.footer.copyright">
         © 2025 Jeong Min Cho. All rights reserved.
       </p>
     </div>

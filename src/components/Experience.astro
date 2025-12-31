@@ -1,11 +1,19 @@
 ---
 const experiences = [
   {
+    titleKey: 'experience.items.founder.title',
     title: 'Founder & Fullstack Software Engineer',
     company: 'Self-Employed',
     location: 'South Korea',
     period: 'Nov 2025 - Present',
+    descriptionKey: 'experience.items.founder.description',
     description: 'Building a fullstack SaaS platform with secure authentication and desktop client application.',
+    highlightKeys: [
+      'experience.items.founder.highlights.0',
+      'experience.items.founder.highlights.1',
+      'experience.items.founder.highlights.2',
+      'experience.items.founder.highlights.3',
+    ],
     highlights: [
       'Built fullstack SaaS platform with Next.js 14, TypeScript frontend backed by FastAPI and PostgreSQL',
       'Developed secure license management system with HWID binding, JWT authentication, and AES-256 encryption',
@@ -15,11 +23,18 @@ const experiences = [
     technologies: ['Next.js', 'TypeScript', 'FastAPI', 'PostgreSQL', 'C++', 'Docker'],
   },
   {
+    titleKey: 'experience.items.army.title',
     title: 'Network Management and Operations Specialist',
     company: 'Republic of Korea Army',
     location: 'South Korea',
     period: 'May 2024 - Nov 2025',
+    descriptionKey: 'experience.items.army.description',
     description: 'Maintained and secured intranet infrastructure supporting mission-critical military operations.',
+    highlightKeys: [
+      'experience.items.army.highlights.0',
+      'experience.items.army.highlights.1',
+      'experience.items.army.highlights.2',
+    ],
     highlights: [
       'Maintained and secured intranet infrastructure supporting 1,000+ personnel with 99%+ uptime',
       'Implemented security protocols and conducted regular system audits for classified communications',
@@ -28,11 +43,20 @@ const experiences = [
     technologies: ['Network Security', 'System Administration', 'Infrastructure'],
   },
   {
+    titleKey: 'experience.items.sdlcSenior.title',
     title: 'Fullstack Software Engineer',
     company: 'Software Development Logistics Consulting',
     location: 'Catonsville, Maryland',
     period: 'Jul 2023 - Apr 2024',
+    descriptionKey: 'experience.items.sdlcSenior.description',
     description: 'Returned to lead development of enterprise applications with expanded responsibilities.',
+    highlightKeys: [
+      'experience.items.sdlcSenior.highlights.0',
+      'experience.items.sdlcSenior.highlights.1',
+      'experience.items.sdlcSenior.highlights.2',
+      'experience.items.sdlcSenior.highlights.3',
+      'experience.items.sdlcSenior.highlights.4',
+    ],
     highlights: [
       'Led frontend development with React, building reusable components and implementing state management',
       'Developed and maintained RESTful APIs using Java and Spring Boot for enterprise client applications',
@@ -43,11 +67,19 @@ const experiences = [
     technologies: ['React', 'Java', 'Spring Boot', 'AWS', 'Jenkins', 'Docker'],
   },
   {
+    titleKey: 'experience.items.sciencelogic.title',
     title: 'Software Engineer',
     company: 'ScienceLogic Inc',
     location: 'Reston, Virginia',
     period: 'Nov 2022 - Jun 2023',
+    descriptionKey: 'experience.items.sciencelogic.description',
     description: 'Built and enhanced dashboard features for enterprise monitoring platform.',
+    highlightKeys: [
+      'experience.items.sciencelogic.highlights.0',
+      'experience.items.sciencelogic.highlights.1',
+      'experience.items.sciencelogic.highlights.2',
+      'experience.items.sciencelogic.highlights.3',
+    ],
     highlights: [
       'Built and enhanced dashboard features using Next.js, React, and GraphQL',
       'Wrote unit and integration tests improving code reliability and reducing regression issues',
@@ -57,11 +89,17 @@ const experiences = [
     technologies: ['Next.js', 'React', 'GraphQL', 'PHP', 'Docker'],
   },
   {
+    titleKey: 'experience.items.sdlcJunior.title',
     title: 'Junior Software Engineer',
     company: 'Software Development Logistics Consulting',
     location: 'Catonsville, Maryland',
     period: 'Jan 2022 - Oct 2022',
+    descriptionKey: 'experience.items.sdlcJunior.description',
     description: 'First tenure developing responsive user interfaces and backend APIs for enterprise clients.',
+    highlightKeys: [
+      'experience.items.sdlcJunior.highlights.0',
+      'experience.items.sdlcJunior.highlights.1',
+    ],
     highlights: [
       'Developed responsive user interfaces with React.js and JavaScript, improving usability and performance',
       'Designed and built RESTful APIs using Java and Spring Boot for seamless frontend-backend communication',
@@ -72,9 +110,11 @@ const experiences = [
 
 const education = [
   {
+    degreeKey: 'experience.education.degree',
     degree: 'Bachelor of Science in Computer Science',
     school: 'George Mason University',
     period: '2017 - 2021',
+    descriptionKey: 'experience.education.description',
     description: "GPA: 3.8/4.0 - Dean's List | Graduated Magna Cum Laude",
   },
 ];
@@ -84,8 +124,8 @@ const education = [
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label mono">&lt;experience&gt;</span>
-      <h2 class="section-title">Work Experience</h2>
-      <p class="section-subtitle">
+      <h2 class="section-title" data-i18n="experience.title">Work Experience</h2>
+      <p class="section-subtitle" data-i18n="experience.subtitle">
         My professional journey and the companies I've worked with
       </p>
     </div>
@@ -100,7 +140,7 @@ const education = [
           <div class="timeline-content glass-card">
             <div class="timeline-header">
               <div>
-                <h3 class="job-title">{exp.title}</h3>
+                <h3 class="job-title" data-i18n={exp.titleKey}>{exp.title}</h3>
                 <div class="company-info">
                   <span class="company-name gradient-text">{exp.company}</span>
                   <span class="divider">•</span>
@@ -109,10 +149,10 @@ const education = [
               </div>
               <span class="period mono">{exp.period}</span>
             </div>
-            <p class="job-description">{exp.description}</p>
+            <p class="job-description" data-i18n={exp.descriptionKey}>{exp.description}</p>
             <ul class="highlights">
-              {exp.highlights.map(highlight => (
-                <li>{highlight}</li>
+              {exp.highlights.map((highlight, i) => (
+                <li data-i18n={exp.highlightKeys[i]}>{highlight}</li>
               ))}
             </ul>
             <div class="tech-used">
@@ -131,18 +171,18 @@ const education = [
           <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
           <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
         </svg>
-        Education
+        <span data-i18n="experience.educationTitle">Education</span>
       </h3>
       {education.map(edu => (
         <div class="education-card glass-card">
           <div class="education-header">
             <div>
-              <h4 class="degree">{edu.degree}</h4>
+              <h4 class="degree" data-i18n={edu.degreeKey}>{edu.degree}</h4>
               <span class="school">{edu.school}</span>
             </div>
             <span class="period mono">{edu.period}</span>
           </div>
-          <p class="education-desc">{edu.description}</p>
+          <p class="education-desc" data-i18n={edu.descriptionKey}>{edu.description}</p>
         </div>
       ))}
     </div>

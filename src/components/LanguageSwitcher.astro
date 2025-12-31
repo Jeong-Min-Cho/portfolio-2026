@@ -1,0 +1,43 @@
+---
+---
+
+<div class="lang-switcher">
+  <button class="lang-btn active" data-lang="en">EN</button>
+  <span class="lang-divider">|</span>
+  <button class="lang-btn" data-lang="ko">KO</button>
+</div>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .lang-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .lang-btn.active {
+    color: var(--accent-primary);
+    background: rgba(99, 102, 241, 0.1);
+  }
+
+  .lang-divider {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+</style>

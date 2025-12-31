@@ -1,10 +1,12 @@
 ---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
 const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#about', key: 'nav.about', label: 'About' },
+  { href: '#projects', key: 'nav.projects', label: 'Projects' },
+  { href: '#skills', key: 'nav.skills', label: 'Skills' },
+  { href: '#experience', key: 'nav.experience', label: 'Experience' },
+  { href: '#contact', key: 'nav.contact', label: 'Contact' },
 ];
 ---
 
@@ -18,10 +20,10 @@ const navLinks = [
 
     <div class="nav-links">
       {navLinks.map(link => (
-        <a href={link.href} class="nav-link">{link.label}</a>
+        <a href={link.href} class="nav-link" data-i18n={link.key}>{link.label}</a>
       ))}
       <a href="https://jeong-min-cho.github.io/" target="_blank" rel="noopener noreferrer" class="nav-link external">
-        Blog
+        <span data-i18n="nav.blog">Blog</span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
           <polyline points="15 3 21 3 21 9"></polyline>
@@ -30,9 +32,12 @@ const navLinks = [
       </a>
     </div>
 
-    <a href="#contact" class="btn btn-primary nav-cta">
-      Let's Talk
-    </a>
+    <div class="nav-right">
+      <LanguageSwitcher />
+      <a href="#contact" class="btn btn-primary nav-cta">
+        <span data-i18n="nav.letsTalk">Let's Talk</span>
+      </a>
+    </div>
 
     <button class="mobile-toggle" aria-label="Toggle menu">
       <span></span>
@@ -45,17 +50,22 @@ const navLinks = [
 <div class="mobile-menu">
   <div class="mobile-menu-content">
     {navLinks.map(link => (
-      <a href={link.href} class="mobile-link">{link.label}</a>
+      <a href={link.href} class="mobile-link" data-i18n={link.key}>{link.label}</a>
     ))}
     <a href="https://jeong-min-cho.github.io/" target="_blank" rel="noopener noreferrer" class="mobile-link external">
-      Blog
+      <span data-i18n="nav.blog">Blog</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
         <polyline points="15 3 21 3 21 9"></polyline>
         <line x1="10" y1="14" x2="21" y2="3"></line>
       </svg>
     </a>
-    <a href="#contact" class="btn btn-primary mobile-cta">Let's Talk</a>
+    <div class="mobile-lang-switcher">
+      <LanguageSwitcher />
+    </div>
+    <a href="#contact" class="btn btn-primary mobile-cta">
+      <span data-i18n="nav.letsTalk">Let's Talk</span>
+    </a>
   </div>
 </div>
 
@@ -201,6 +211,12 @@ const navLinks = [
     opacity: 1;
   }
 
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
   .nav-cta {
     padding: 0.625rem 1.25rem;
     font-size: 0.9rem;
@@ -288,8 +304,12 @@ const navLinks = [
     margin-top: 1rem;
   }
 
+  .mobile-lang-switcher {
+    margin: 1rem 0;
+  }
+
   @media (max-width: 900px) {
-    .nav-links, .nav-cta {
+    .nav-links, .nav-right {
       display: none;
     }
 

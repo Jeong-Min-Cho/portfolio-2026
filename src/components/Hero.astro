@@ -14,21 +14,21 @@ const socialLinks = [
     <div class="hero-content">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        <span class="mono">Fullstack Software Engineer</span>
+        <span data-i18n="hero.badge">Fullstack Software Engineer</span>
       </div>
 
       <h1 class="hero-title">
-        <span class="hero-greeting">Hello, I'm</span>
+        <span class="hero-greeting" data-i18n="hero.greeting">Hello, I'm</span>
         <span class="hero-name">
-          <span class="name-text">Jeong Min Cho</span>
+          <span class="name-text" data-i18n="hero.name">Jeong Min Cho</span>
           <span class="name-cursor">|</span>
         </span>
         <span class="hero-role">
-          I build <span class="gradient-text glow-text">scalable</span> web applications
+          <span data-i18n="hero.role">I build <span class="gradient-text glow-text">scalable</span> web applications</span>
         </span>
       </h1>
 
-      <p class="hero-description">
+      <p class="hero-description" data-i18n="hero.description">
         A Fullstack Software Engineer with 3+ years of experience building
         scalable web applications using React, Next.js, Java, and Python
         across enterprise and startup environments.
@@ -36,13 +36,13 @@ const socialLinks = [
 
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">
-          <span>View My Work</span>
+          <span data-i18n="hero.viewWork">View My Work</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M7 17L17 7M17 7H7M17 7V17"/>
           </svg>
         </a>
         <a href="#contact" class="btn btn-secondary">
-          <span>Get In Touch</span>
+          <span data-i18n="hero.getInTouch">Get In Touch</span>
         </a>
       </div>
 
@@ -93,13 +93,13 @@ const socialLinks = [
           </div>
         </div>
         <div class="floating-badge badge-1">
-          <span>Ship Fast</span>
+          <span data-i18n="hero.badges.shipFast">Ship Fast</span>
         </div>
         <div class="floating-badge badge-2">
-          <span>Clean Code</span>
+          <span data-i18n="hero.badges.cleanCode">Clean Code</span>
         </div>
         <div class="floating-badge badge-3">
-          <span>Problem Solver</span>
+          <span data-i18n="hero.badges.problemSolver">Problem Solver</span>
         </div>
       </div>
     </div>
@@ -109,7 +109,7 @@ const socialLinks = [
     <div class="mouse">
       <div class="wheel"></div>
     </div>
-    <span>Scroll to explore</span>
+    <span data-i18n="hero.scroll">Scroll to explore</span>
   </div>
 </section>
 
@@ -204,9 +204,11 @@ const socialLinks = [
     border: 1px solid rgba(99, 102, 241, 0.3);
     border-radius: 50px;
     font-size: 0.875rem;
+    font-weight: 600;
     color: var(--accent-primary);
     margin-bottom: 2rem;
     animation: fadeInUp 0.8s ease forwards;
+    font-family: 'Inter', 'Noto Sans KR', system-ui, sans-serif;
   }
 
   .badge-dot {
@@ -382,6 +384,7 @@ const socialLinks = [
     color: var(--text-primary);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     animation: floatBadge 6s ease-in-out infinite;
+    font-family: 'Inter', 'Noto Sans KR', system-ui, sans-serif;
   }
 
   .badge-1 { top: -1rem; right: -1rem; animation-delay: 0s; }
@@ -449,5 +452,6 @@ const socialLinks = [
   @media (max-width: 480px) {
     .hero-cta { flex-direction: column; }
     .btn { width: 100%; justify-content: center; }
+    .scroll-indicator { display: none; }
   }
 </style>
