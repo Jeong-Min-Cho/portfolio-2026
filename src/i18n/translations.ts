@@ -55,7 +55,12 @@ export const translations = {
       npmPackages: "NPM Packages",
       liveDemo: "Live Demo",
       source: "Source",
+      viewDetails: "View Details",
       items: {
+        licensingSystem: {
+          description:
+            "A comprehensive full-stack software licensing platform with hardware-based protection, featuring web dashboard, user portal, and secure Windows desktop client. 82,000+ lines of code across Python, TypeScript, and C++.",
+        },
         unicode: {
           description:
             "A web utility for encoding and decoding Unicode characters, built to showcase the unicode-escaper npm package. Convert text to various Unicode formats with an intuitive interface.",
@@ -206,6 +211,78 @@ export const translations = {
         copyright: "© 2025 Jeong Min Cho. All rights reserved.",
       },
     },
+
+    // Licensing System Project Page
+    licensingSystem: {
+      backToProjects: "Back to Projects",
+      title: "Software Licensing & Distribution System",
+      subtitle:
+        "A comprehensive full-stack software licensing platform with hardware-based protection, featuring web dashboard, user portal, and secure Windows desktop client.",
+      meta: {
+        type: "Project Type",
+        typeValue: "Full-Stack Platform",
+        codebase: "Total Codebase",
+        role: "Role",
+        roleValue: "Full-Stack Developer",
+      },
+      architecture: {
+        title: "System Architecture",
+        description:
+          "The platform consists of four major components working together to provide secure software licensing and distribution.",
+      },
+      componentsTitle: "Components",
+      components: {
+        backend: { title: "Backend API" },
+        frontend: { title: "Admin Dashboard & User Portal" },
+        desktop: { title: "Windows Desktop Client" },
+        module: { title: "Client Module" },
+      },
+      techStack: "Tech Stack",
+      keyFeatures: "Key Features",
+      metrics: "Metrics",
+      authFlow: {
+        title: "Authentication Flows",
+        description:
+          "Dual authentication system supporting both web dashboard sessions and desktop client JWT tokens.",
+      },
+      encryption: {
+        title: "File Encryption Flow",
+        description:
+          "Secure file delivery with AES-256-GCM encryption and per-user HKDF-derived keys.",
+      },
+      security: {
+        title: "Security Architecture",
+        description:
+          "Defense in depth approach with multiple security layers protecting the platform.",
+      },
+      deployment: {
+        title: "Deployment Architecture",
+        description:
+          "Containerized deployment using Docker Compose for easy scaling and management.",
+      },
+      stats: {
+        title: "Code Statistics",
+        component: "Component",
+        language: "Language",
+        loc: "Lines of Code",
+        total: "Total",
+      },
+      techOverview: {
+        title: "Technology Overview",
+      },
+      deepDive: {
+        title: "Technical Deep Dive",
+        description: "Key implementation details showcasing the security and architecture decisions.",
+      },
+      challenges: {
+        title: "Challenges & Solutions",
+        description: "Complex problems encountered during development and how they were solved.",
+      },
+      learnings: {
+        title: "Key Learnings",
+        description: "Insights gained from building this production-ready system.",
+      },
+    },
   },
 
   ko: {
@@ -263,7 +340,12 @@ export const translations = {
       npmPackages: "NPM 패키지",
       liveDemo: "라이브 데모",
       source: "소스 코드",
+      viewDetails: "자세히 보기",
       items: {
+        licensingSystem: {
+          description:
+            "하드웨어 기반 보호 기능을 갖춘 풀스택 소프트웨어 라이선싱 플랫폼입니다. 웹 대시보드, 사용자 포털, 보안 Windows 데스크톱 클라이언트를 포함하며, Python, TypeScript, C++로 82,000줄 이상의 코드로 구성되어 있습니다.",
+        },
         unicode: {
           description:
             "unicode-escaper npm 패키지를 활용한 유니코드 인코딩/디코딩 웹 유틸리티입니다. 직관적인 인터페이스로 다양한 유니코드 형식으로 텍스트를 변환할 수 있습니다.",
@@ -413,6 +495,78 @@ export const translations = {
       footer: {
         text: "열정이 담긴 개발자가 한 디자인 & 개발",
         copyright: "© 2025 Jeong Min Cho. All rights reserved.",
+      },
+    },
+
+    // Licensing System Project Page
+    licensingSystem: {
+      backToProjects: "프로젝트로 돌아가기",
+      title: "소프트웨어 라이선싱 & 배포 시스템",
+      subtitle:
+        "하드웨어 기반 보호 기능을 갖춘 풀스택 소프트웨어 라이선싱 플랫폼입니다. 웹 대시보드, 사용자 포털, 보안 Windows 데스크톱 클라이언트를 포함합니다.",
+      meta: {
+        type: "프로젝트 유형",
+        typeValue: "풀스택 플랫폼",
+        codebase: "전체 코드베이스",
+        role: "역할",
+        roleValue: "풀스택 개발자",
+      },
+      architecture: {
+        title: "시스템 아키텍처",
+        description:
+          "이 플랫폼은 안전한 소프트웨어 라이선싱과 배포를 제공하기 위해 함께 작동하는 4개의 주요 컴포넌트로 구성되어 있습니다.",
+      },
+      componentsTitle: "컴포넌트",
+      components: {
+        backend: { title: "백엔드 API" },
+        frontend: { title: "관리자 대시보드 & 사용자 포털" },
+        desktop: { title: "Windows 데스크톱 클라이언트" },
+        module: { title: "클라이언트 모듈" },
+      },
+      techStack: "기술 스택",
+      keyFeatures: "주요 기능",
+      metrics: "지표",
+      authFlow: {
+        title: "인증 플로우",
+        description:
+          "웹 대시보드 세션과 데스크톱 클라이언트 JWT 토큰을 모두 지원하는 이중 인증 시스템입니다.",
+      },
+      encryption: {
+        title: "파일 암호화 플로우",
+        description:
+          "AES-256-GCM 암호화와 사용자별 HKDF 파생 키를 사용한 안전한 파일 배포입니다.",
+      },
+      security: {
+        title: "보안 아키텍처",
+        description:
+          "플랫폼을 보호하는 다중 보안 레이어를 갖춘 심층 방어 접근 방식입니다.",
+      },
+      deployment: {
+        title: "배포 아키텍처",
+        description:
+          "쉬운 확장과 관리를 위해 Docker Compose를 사용한 컨테이너화된 배포입니다.",
+      },
+      stats: {
+        title: "코드 통계",
+        component: "컴포넌트",
+        language: "언어",
+        loc: "코드 라인 수",
+        total: "합계",
+      },
+      techOverview: {
+        title: "기술 개요",
+      },
+      deepDive: {
+        title: "기술 심층 분석",
+        description: "보안 및 아키텍처 결정을 보여주는 핵심 구현 세부 사항입니다.",
+      },
+      challenges: {
+        title: "도전과 해결",
+        description: "개발 중 직면한 복잡한 문제들과 해결 방법입니다.",
+      },
+      learnings: {
+        title: "핵심 교훈",
+        description: "이 프로덕션 시스템을 구축하며 얻은 인사이트입니다.",
       },
     },
   },

@@ -1,6 +1,15 @@
 ---
 const projects = [
   {
+    title: 'Software Licensing System',
+    descriptionKey: 'projects.items.licensingSystem.description',
+    description: 'A comprehensive full-stack software licensing platform with hardware-based protection, featuring web dashboard, user portal, and secure Windows desktop client. 82,000+ lines of code across Python, TypeScript, and C++.',
+    image: '/projects/licensing-system/tech-stack.svg',
+    tags: ['FastAPI', 'Next.js', 'C++', 'PostgreSQL', 'Docker'],
+    detailUrl: '/projects/licensing-system',
+    featured: true,
+  },
+  {
     title: 'Unicode Encoder Decoder',
     descriptionKey: 'projects.items.unicode.description',
     description: 'A web utility for encoding and decoding Unicode characters, built to showcase the unicode-escaper npm package. Convert text to various Unicode formats with an intuitive interface.',
@@ -97,6 +106,15 @@ const otherProjects = projects.filter(p => !p.featured);
             <img src={project.image} alt={project.title} class="project-screenshot" />
             <div class="project-overlay">
               <div class="overlay-content">
+                {project.detailUrl && (
+                  <a href={project.detailUrl} class="overlay-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <span data-i18n="projects.viewDetails">View Details</span>
+                  </a>
+                )}
                 {project.liveUrl && (
                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="overlay-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
