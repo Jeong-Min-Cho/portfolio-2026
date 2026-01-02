@@ -142,8 +142,24 @@ const { title } = Astro.props;
 
         // Initialize on DOM ready
         document.addEventListener('DOMContentLoaded', () => {
-          // Set initial language (instant = true to skip animation on load)
-          window.setLanguage(savedLang, true);
+          // Sync button states with saved language
+          document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === savedLang);
+          });
+
+          // Apply translations for saved language
+          const elements = document.querySelectorAll('[data-i18n]');
+          elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const translation = getTranslation(key, savedLang);
+            if (translation) {
+              if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = translation;
+              } else {
+                el.textContent = translation;
+              }
+            }
+          });
 
           // Add click handlers for language buttons
           document.querySelectorAll('.lang-btn').forEach(btn => {
