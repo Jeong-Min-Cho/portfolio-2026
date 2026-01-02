@@ -384,6 +384,106 @@ export const translations = {
         title: "Key Learnings",
         description: "Insights gained from building this production-ready system.",
       },
+      securityLayers: {
+        layer: "Layer",
+        network: {
+          title: "Network Security",
+          items: [
+            "HTTPS/TLS for all communications",
+            "Rate limiting (Redis token bucket)",
+            "IP blocklist middleware",
+            "CORS configuration",
+          ],
+        },
+        auth: {
+          title: "Authentication",
+          items: [
+            "JWT tokens (15 min access, 7 day refresh)",
+            "HTTP-only session cookies",
+            "HWID binding",
+            "Multi-device limits",
+          ],
+        },
+        data: {
+          title: "Data Protection",
+          items: [
+            "Argon2id password hashing",
+            "AES-256-GCM file encryption",
+            "ECDSA signature verification",
+            "HKDF key derivation",
+          ],
+        },
+        app: {
+          title: "Application Security",
+          items: [
+            "Input validation (Pydantic/Zod)",
+            "SQL injection prevention",
+            "XSS prevention (React)",
+            "CSRF protection",
+          ],
+        },
+      },
+      codeExamples: {
+        auth: {
+          title: "Dual Authentication System",
+          description: "Supporting both web sessions and desktop JWT tokens with hardware binding",
+        },
+        encryption: {
+          title: "AES-256-GCM File Encryption",
+          description: "Server-side file encryption with authenticated encryption",
+        },
+        decryption: {
+          title: "In-Memory Decryption (C++)",
+          description: "Files decrypted entirely in memory - plaintext never touches disk",
+        },
+        hwid: {
+          title: "Hardware ID Generation",
+          description: "Stable device identification from multiple hardware components",
+        },
+      },
+      challengeLabels: {
+        problem: "Problem",
+        solution: "Solution",
+      },
+      challengeItems: {
+        tokenRefresh: {
+          title: "Concurrent Token Refresh",
+          problem: "Multiple API calls could trigger simultaneous token refreshes, causing race conditions.",
+          solution: "Implemented a request queue that pauses all requests during refresh, then releases them once the new token is available.",
+        },
+        session: {
+          title: "Cross-Platform Session Management",
+          problem: "Web sessions use cookies, but desktop clients cannot use cookies.",
+          solution: "Implemented parallel authentication systems with a shared session model that handles both session types.",
+        },
+        hwid: {
+          title: "Hardware ID Stability",
+          problem: "Some HWID components (like MAC addresses) change frequently, causing false \"new device\" detections.",
+          solution: "Use only stable components (CPU ID, motherboard serial) and implement similarity checking with 70% threshold.",
+        },
+      },
+      learningItems: {
+        security: {
+          title: "Security is Architecture",
+          description: "Security isn't something you add at the end—it must be designed in from the start. Every layer needs consideration.",
+        },
+        async: {
+          title: "Async is Essential",
+          description: "For any system handling concurrent users, blocking I/O is a bottleneck. 100% async architecture eliminates this.",
+        },
+        typeSafety: {
+          title: "Type Safety Saves Time",
+          description: "The hours spent defining types are repaid in fewer bugs and easier refactoring. TypeScript + Pydantic + Zod.",
+        },
+        crossPlatform: {
+          title: "Cross-Platform is Hard",
+          description: "Web and desktop have fundamentally different models. Abstracting the differences requires careful design.",
+        },
+        monitoring: {
+          title: "Monitoring is Not Optional",
+          description: "Without comprehensive logs, debugging production issues is nearly impossible. Log everything.",
+        },
+      },
     },
   },
 
@@ -771,6 +871,106 @@ export const translations = {
       learnings: {
         title: "핵심 교훈",
         description: "이 프로덕션 시스템을 구축하며 얻은 인사이트입니다.",
+      },
+      securityLayers: {
+        layer: "레이어",
+        network: {
+          title: "네트워크 보안",
+          items: [
+            "모든 통신에 HTTPS/TLS 적용",
+            "속도 제한 (Redis 토큰 버킷)",
+            "IP 차단 목록 미들웨어",
+            "CORS 설정",
+          ],
+        },
+        auth: {
+          title: "인증",
+          items: [
+            "JWT 토큰 (15분 액세스, 7일 리프레시)",
+            "HTTP-only 세션 쿠키",
+            "HWID 바인딩",
+            "다중 기기 제한",
+          ],
+        },
+        data: {
+          title: "데이터 보호",
+          items: [
+            "Argon2id 비밀번호 해싱",
+            "AES-256-GCM 파일 암호화",
+            "ECDSA 서명 검증",
+            "HKDF 키 파생",
+          ],
+        },
+        app: {
+          title: "애플리케이션 보안",
+          items: [
+            "입력 검증 (Pydantic/Zod)",
+            "SQL 인젝션 방지",
+            "XSS 방지 (React)",
+            "CSRF 보호",
+          ],
+        },
+      },
+      codeExamples: {
+        auth: {
+          title: "이중 인증 시스템",
+          description: "웹 세션과 데스크톱 JWT 토큰을 하드웨어 바인딩과 함께 지원",
+        },
+        encryption: {
+          title: "AES-256-GCM 파일 암호화",
+          description: "인증된 암호화를 사용한 서버 측 파일 암호화",
+        },
+        decryption: {
+          title: "인메모리 복호화 (C++)",
+          description: "파일을 완전히 메모리에서 복호화 - 평문이 디스크에 닿지 않음",
+        },
+        hwid: {
+          title: "하드웨어 ID 생성",
+          description: "여러 하드웨어 컴포넌트로부터 안정적인 기기 식별",
+        },
+      },
+      challengeLabels: {
+        problem: "문제",
+        solution: "해결",
+      },
+      challengeItems: {
+        tokenRefresh: {
+          title: "동시 토큰 갱신",
+          problem: "여러 API 호출이 동시에 토큰 갱신을 트리거하여 경쟁 조건을 발생시킬 수 있습니다.",
+          solution: "갱신 중 모든 요청을 일시 중지하고 새 토큰이 준비되면 해제하는 요청 큐를 구현했습니다.",
+        },
+        session: {
+          title: "크로스 플랫폼 세션 관리",
+          problem: "웹 세션은 쿠키를 사용하지만 데스크톱 클라이언트는 쿠키를 사용할 수 없습니다.",
+          solution: "두 세션 유형을 모두 처리하는 공유 세션 모델로 병렬 인증 시스템을 구현했습니다.",
+        },
+        hwid: {
+          title: "하드웨어 ID 안정성",
+          problem: "일부 HWID 구성 요소(예: MAC 주소)는 자주 변경되어 잘못된 \"새 기기\" 감지를 발생시킵니다.",
+          solution: "안정적인 구성 요소(CPU ID, 메인보드 시리얼)만 사용하고 70% 임계값으로 유사도 검사를 구현합니다.",
+        },
+      },
+      learningItems: {
+        security: {
+          title: "보안은 아키텍처다",
+          description: "보안은 마지막에 추가하는 것이 아니라 처음부터 설계에 포함되어야 합니다. 모든 레이어에 대한 고려가 필요합니다.",
+        },
+        async: {
+          title: "비동기는 필수다",
+          description: "동시 사용자를 처리하는 모든 시스템에서 블로킹 I/O는 병목입니다. 100% 비동기 아키텍처가 이를 해결합니다.",
+        },
+        typeSafety: {
+          title: "타입 안전성이 시간을 절약한다",
+          description: "타입 정의에 투자한 시간은 더 적은 버그와 쉬운 리팩토링으로 보답받습니다. TypeScript + Pydantic + Zod.",
+        },
+        crossPlatform: {
+          title: "크로스 플랫폼은 어렵다",
+          description: "웹과 데스크톱은 근본적으로 다른 모델을 가지고 있습니다. 차이점을 추상화하려면 신중한 설계가 필요합니다.",
+        },
+        monitoring: {
+          title: "모니터링은 선택이 아니다",
+          description: "포괄적인 로그 없이는 프로덕션 문제 디버깅이 거의 불가능합니다. 모든 것을 로깅하세요.",
+        },
       },
     },
   },

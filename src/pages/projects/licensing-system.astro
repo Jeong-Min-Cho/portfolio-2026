@@ -113,25 +113,6 @@ const components = [
   },
 ];
 
-const securityLayers = [
-  {
-    layer: 'Network Security',
-    items: ['HTTPS/TLS for all communications', 'Rate limiting (Redis token bucket)', 'IP blocklist middleware', 'CORS configuration'],
-  },
-  {
-    layer: 'Authentication',
-    items: ['JWT tokens (15 min access, 7 day refresh)', 'HTTP-only session cookies', 'HWID binding', 'Multi-device limits'],
-  },
-  {
-    layer: 'Data Protection',
-    items: ['Argon2id password hashing', 'AES-256-GCM file encryption', 'ECDSA signature verification', 'HKDF key derivation'],
-  },
-  {
-    layer: 'Application Security',
-    items: ['Input validation (Pydantic/Zod)', 'SQL injection prevention', 'XSS prevention (React)', 'CSRF protection'],
-  },
-];
-
 const codeStats = [
   { component: 'Backend', language: 'Python', loc: '~15,000' },
   { component: 'Frontend', language: 'TypeScript/React', loc: '~15,000' },
@@ -139,12 +120,9 @@ const codeStats = [
   { component: 'Client Module', language: 'C++', loc: '~40,000' },
 ];
 
-const codeExamples = [
-  {
-    title: 'Dual Authentication System',
-    description: 'Supporting both web sessions and desktop JWT tokens with hardware binding',
-    language: 'python',
-    code: `@router.post("/client/login")
+// Code snippets stored in JS to avoid esbuild parsing issues
+const codeSnippets = {
+  auth: `@router.post("/client/login")
 async def client_login(
     credentials: ClientLoginRequest,
     db: AsyncSession = Depends(get_db)
@@ -170,12 +148,7 @@ async def client_login(
         "refresh_token": refresh_token,
         "device_id": device.id
     }`,
-  },
-  {
-    title: 'AES-256-GCM File Encryption',
-    description: 'Server-side file encryption with authenticated encryption',
-    language: 'python',
-    code: `def encrypt_file(plaintext: bytes, key: bytes) -> bytes:
+  encryption: `def encrypt_file(plaintext: bytes, key: bytes) -> bytes:
     nonce = os.urandom(12)  # 96-bit nonce
     cipher = Cipher(algorithms.AES(key), modes.GCM(nonce))
     encryptor = cipher.encryptor()
@@ -192,12 +165,7 @@ def derive_user_key(user_id: str, access_token: str) -> bytes:
         info=b"file_decryption_key"
     )
     return hkdf.derive(access_token.encode())`,
-  },
-  {
-    title: 'In-Memory Decryption (C++)',
-    description: 'Files decrypted entirely in memory - plaintext never touches disk',
-    language: 'cpp',
-    code: `std::vector<uint8_t> DecryptFile(
+  decryption: `std::vector<uint8_t> DecryptFile(
     const std::vector<uint8_t>& encrypted,
     const std::string& userId,
     const std::string& accessToken
@@ -216,12 +184,7 @@ def derive_user_key(user_id: str, access_token: str) -> bytes:
     // Decrypt with AES-256-GCM
     return AES_GCM_Decrypt(ciphertext, key, nonce, tag);
 }`,
-  },
-  {
-    title: 'Hardware ID Generation',
-    description: 'Stable device identification from multiple hardware components',
-    language: 'cpp',
-    code: `std::string GenerateHWID() {
+  hwid: `std::string GenerateHWID() {
     std::string components;
 
     // CPU ID
@@ -241,16 +204,7 @@ def derive_user_key(user_id: str, access_token: str) -> bytes:
     // Hash everything together
     return SHA256(components);
 }`,
-  },
-];
-
-const challenges = [
-  {
-    title: 'Concurrent Token Refresh',
-    problem: 'Multiple API calls could trigger simultaneous token refreshes, causing race conditions.',
-    solution: 'Implemented a request queue that pauses all requests during refresh, then releases them once the new token is available.',
-    language: 'typescript',
-    code: `let isRefreshing = false;
+  tokenRefresh: `let isRefreshing = false;
 let refreshQueue: Array<() => void> = [];
 
 async function refreshToken() {
@@ -268,26 +222,14 @@ async function refreshToken() {
     refreshQueue = [];
   }
 }`,
-  },
-  {
-    title: 'Cross-Platform Session Management',
-    problem: 'Web sessions use cookies, but desktop clients cannot use cookies.',
-    solution: 'Implemented parallel authentication systems with a shared session model that handles both session types.',
-    language: 'python',
-    code: `class Session(Base):
+  session: `class Session(Base):
     session_id = Column(UUID, primary_key=True)
     user_id = Column(UUID, ForeignKey("users.id"))
     token_hash = Column(String(64))  # SHA-256 of token
     session_type = Column(Enum("web", "desktop"))
     device_id = Column(UUID, nullable=True)  # Only for desktop
     expires_at = Column(DateTime)`,
-  },
-  {
-    title: 'Hardware ID Stability',
-    problem: 'Some HWID components (like MAC addresses) change frequently, causing false "new device" detections.',
-    solution: 'Use only stable components (CPU ID, motherboard serial) and implement similarity checking with 70% threshold.',
-    language: 'cpp',
-    code: `float CalculateHWIDSimilarity(
+  hwidSimilarity: `float CalculateHWIDSimilarity(
     const std::string& stored,
     const std::string& current
 ) {
@@ -303,36 +245,8 @@ async function refreshToken() {
 }
 
 // Allow if >70% similar (tolerates minor changes)`,
-  },
-];
+};
 
-const learnings = [
-  {
-    icon: '🔐',
-    title: 'Security is Architecture',
-    description: "Security isn't something you add at the end—it must be designed in from the start. Every layer needs consideration.",
-  },
-  {
-    icon: '⚡',
-    title: 'Async is Essential',
-    description: 'For any system handling concurrent users, blocking I/O is a bottleneck. 100% async architecture eliminates this.',
-  },
-  {
-    icon: '🎯',
-    title: 'Type Safety Saves Time',
-    description: 'The hours spent defining types are repaid in fewer bugs and easier refactoring. TypeScript + Pydantic + Zod.',
-  },
-  {
-    icon: '🌐',
-    title: 'Cross-Platform is Hard',
-    description: 'Web and desktop have fundamentally different models. Abstracting the differences requires careful design.',
-  },
-  {
-    icon: '📊',
-    title: 'Monitoring is Not Optional',
-    description: 'Without comprehensive logs, debugging production issues is nearly impossible. Log everything.',
-  },
-];
 ---
 
 <Layout title="Software Licensing System | Jeong Min Cho">
@@ -583,19 +497,54 @@ const learnings = [
         </div>
 
         <div class="security-layers">
-          {securityLayers.map((layer, index) => (
-            <div class="security-layer glass-card">
-              <div class="layer-header">
-                <span class="layer-number">Layer {index + 1}</span>
-                <h4 class="layer-title">{layer.layer}</h4>
-              </div>
-              <ul class="layer-items">
-                {layer.items.map(item => (
-                  <li>{item}</li>
-                ))}
-              </ul>
+          <div class="security-layer glass-card">
+            <div class="layer-header">
+              <span class="layer-number"><span data-i18n="licensingSystem.securityLayers.layer">Layer</span> 1</span>
+              <h4 class="layer-title" data-i18n="licensingSystem.securityLayers.network.title">Network Security</h4>
             </div>
-          ))}
+            <ul class="layer-items">
+              <li data-i18n="licensingSystem.securityLayers.network.items.0">HTTPS/TLS for all communications</li>
+              <li data-i18n="licensingSystem.securityLayers.network.items.1">Rate limiting (Redis token bucket)</li>
+              <li data-i18n="licensingSystem.securityLayers.network.items.2">IP blocklist middleware</li>
+              <li data-i18n="licensingSystem.securityLayers.network.items.3">CORS configuration</li>
+            </ul>
+          </div>
+          <div class="security-layer glass-card">
+            <div class="layer-header">
+              <span class="layer-number"><span data-i18n="licensingSystem.securityLayers.layer">Layer</span> 2</span>
+              <h4 class="layer-title" data-i18n="licensingSystem.securityLayers.auth.title">Authentication</h4>
+            </div>
+            <ul class="layer-items">
+              <li data-i18n="licensingSystem.securityLayers.auth.items.0">JWT tokens (15 min access, 7 day refresh)</li>
+              <li data-i18n="licensingSystem.securityLayers.auth.items.1">HTTP-only session cookies</li>
+              <li data-i18n="licensingSystem.securityLayers.auth.items.2">HWID binding</li>
+              <li data-i18n="licensingSystem.securityLayers.auth.items.3">Multi-device limits</li>
+            </ul>
+          </div>
+          <div class="security-layer glass-card">
+            <div class="layer-header">
+              <span class="layer-number"><span data-i18n="licensingSystem.securityLayers.layer">Layer</span> 3</span>
+              <h4 class="layer-title" data-i18n="licensingSystem.securityLayers.data.title">Data Protection</h4>
+            </div>
+            <ul class="layer-items">
+              <li data-i18n="licensingSystem.securityLayers.data.items.0">Argon2id password hashing</li>
+              <li data-i18n="licensingSystem.securityLayers.data.items.1">AES-256-GCM file encryption</li>
+              <li data-i18n="licensingSystem.securityLayers.data.items.2">ECDSA signature verification</li>
+              <li data-i18n="licensingSystem.securityLayers.data.items.3">HKDF key derivation</li>
+            </ul>
+          </div>
+          <div class="security-layer glass-card">
+            <div class="layer-header">
+              <span class="layer-number"><span data-i18n="licensingSystem.securityLayers.layer">Layer</span> 4</span>
+              <h4 class="layer-title" data-i18n="licensingSystem.securityLayers.app.title">Application Security</h4>
+            </div>
+            <ul class="layer-items">
+              <li data-i18n="licensingSystem.securityLayers.app.items.0">Input validation (Pydantic/Zod)</li>
+              <li data-i18n="licensingSystem.securityLayers.app.items.1">SQL injection prevention</li>
+              <li data-i18n="licensingSystem.securityLayers.app.items.2">XSS prevention (React)</li>
+              <li data-i18n="licensingSystem.securityLayers.app.items.3">CSRF protection</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -676,16 +625,38 @@ const learnings = [
         </p>
 
         <div class="code-examples">
-          {codeExamples.map((example) => (
-            <div class="code-example glass-card">
-              <div class="code-header">
-                <h3>{example.title}</h3>
-                <span class="code-lang">{example.language}</span>
-              </div>
-              <p class="code-desc">{example.description}</p>
-              <pre class="code-block"><code class={`language-${example.language}`} set:html={example.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+          <div class="code-example glass-card">
+            <div class="code-header">
+              <h3 data-i18n="licensingSystem.codeExamples.auth.title">Dual Authentication System</h3>
+              <span class="code-lang">python</span>
             </div>
-          ))}
+            <p class="code-desc" data-i18n="licensingSystem.codeExamples.auth.description">Supporting both web sessions and desktop JWT tokens with hardware binding</p>
+            <pre class="code-block"><code class="language-python" set:html={codeSnippets.auth.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+          </div>
+          <div class="code-example glass-card">
+            <div class="code-header">
+              <h3 data-i18n="licensingSystem.codeExamples.encryption.title">AES-256-GCM File Encryption</h3>
+              <span class="code-lang">python</span>
+            </div>
+            <p class="code-desc" data-i18n="licensingSystem.codeExamples.encryption.description">Server-side file encryption with authenticated encryption</p>
+            <pre class="code-block"><code class="language-python" set:html={codeSnippets.encryption.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+          </div>
+          <div class="code-example glass-card">
+            <div class="code-header">
+              <h3 data-i18n="licensingSystem.codeExamples.decryption.title">In-Memory Decryption (C++)</h3>
+              <span class="code-lang">cpp</span>
+            </div>
+            <p class="code-desc" data-i18n="licensingSystem.codeExamples.decryption.description">Files decrypted entirely in memory - plaintext never touches disk</p>
+            <pre class="code-block"><code class="language-cpp" set:html={codeSnippets.decryption.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+          </div>
+          <div class="code-example glass-card">
+            <div class="code-header">
+              <h3 data-i18n="licensingSystem.codeExamples.hwid.title">Hardware ID Generation</h3>
+              <span class="code-lang">cpp</span>
+            </div>
+            <p class="code-desc" data-i18n="licensingSystem.codeExamples.hwid.description">Stable device identification from multiple hardware components</p>
+            <pre class="code-block"><code class="language-cpp" set:html={codeSnippets.hwid.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+          </div>
         </div>
       </div>
     </section>
@@ -699,23 +670,51 @@ const learnings = [
         </p>
 
         <div class="challenges-grid">
-          {challenges.map((challenge, index) => (
-            <div class="challenge-card glass-card">
-              <div class="challenge-number">#{index + 1}</div>
-              <h3 class="challenge-title">{challenge.title}</h3>
-              <div class="challenge-content">
-                <div class="problem">
-                  <span class="label">Problem</span>
-                  <p>{challenge.problem}</p>
-                </div>
-                <div class="solution">
-                  <span class="label">Solution</span>
-                  <p>{challenge.solution}</p>
-                </div>
-                <pre class="code-block small"><code class={`language-${challenge.language}`} set:html={challenge.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+          <div class="challenge-card glass-card">
+            <div class="challenge-number">#1</div>
+            <h3 class="challenge-title" data-i18n="licensingSystem.challengeItems.tokenRefresh.title">Concurrent Token Refresh</h3>
+            <div class="challenge-content">
+              <div class="problem">
+                <span class="label" data-i18n="licensingSystem.challengeLabels.problem">Problem</span>
+                <p data-i18n="licensingSystem.challengeItems.tokenRefresh.problem">Multiple API calls could trigger simultaneous token refreshes, causing race conditions.</p>
               </div>
+              <div class="solution">
+                <span class="label" data-i18n="licensingSystem.challengeLabels.solution">Solution</span>
+                <p data-i18n="licensingSystem.challengeItems.tokenRefresh.solution">Implemented a request queue that pauses all requests during refresh, then releases them once the new token is available.</p>
+              </div>
+              <pre class="code-block small"><code class="language-typescript" set:html={codeSnippets.tokenRefresh.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
             </div>
-          ))}
+          </div>
+          <div class="challenge-card glass-card">
+            <div class="challenge-number">#2</div>
+            <h3 class="challenge-title" data-i18n="licensingSystem.challengeItems.session.title">Cross-Platform Session Management</h3>
+            <div class="challenge-content">
+              <div class="problem">
+                <span class="label" data-i18n="licensingSystem.challengeLabels.problem">Problem</span>
+                <p data-i18n="licensingSystem.challengeItems.session.problem">Web sessions use cookies, but desktop clients cannot use cookies.</p>
+              </div>
+              <div class="solution">
+                <span class="label" data-i18n="licensingSystem.challengeLabels.solution">Solution</span>
+                <p data-i18n="licensingSystem.challengeItems.session.solution">Implemented parallel authentication systems with a shared session model that handles both session types.</p>
+              </div>
+              <pre class="code-block small"><code class="language-python" set:html={codeSnippets.session.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+            </div>
+          </div>
+          <div class="challenge-card glass-card">
+            <div class="challenge-number">#3</div>
+            <h3 class="challenge-title" data-i18n="licensingSystem.challengeItems.hwid.title">Hardware ID Stability</h3>
+            <div class="challenge-content">
+              <div class="problem">
+                <span class="label" data-i18n="licensingSystem.challengeLabels.problem">Problem</span>
+                <p data-i18n="licensingSystem.challengeItems.hwid.problem">Some HWID components (like MAC addresses) change frequently, causing false "new device" detections.</p>
+              </div>
+              <div class="solution">
+                <span class="label" data-i18n="licensingSystem.challengeLabels.solution">Solution</span>
+                <p data-i18n="licensingSystem.challengeItems.hwid.solution">Use only stable components (CPU ID, motherboard serial) and implement similarity checking with 70% threshold.</p>
+              </div>
+              <pre class="code-block small"><code class="language-cpp" set:html={codeSnippets.hwidSimilarity.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -729,13 +728,31 @@ const learnings = [
         </p>
 
         <div class="learnings-grid">
-          {learnings.map((learning) => (
-            <div class="learning-card glass-card">
-              <span class="learning-icon">{learning.icon}</span>
-              <h3>{learning.title}</h3>
-              <p>{learning.description}</p>
-            </div>
-          ))}
+          <div class="learning-card glass-card">
+            <span class="learning-icon">🔐</span>
+            <h3 data-i18n="licensingSystem.learningItems.security.title">Security is Architecture</h3>
+            <p data-i18n="licensingSystem.learningItems.security.description">Security isn't something you add at the end—it must be designed in from the start. Every layer needs consideration.</p>
+          </div>
+          <div class="learning-card glass-card">
+            <span class="learning-icon">⚡</span>
+            <h3 data-i18n="licensingSystem.learningItems.async.title">Async is Essential</h3>
+            <p data-i18n="licensingSystem.learningItems.async.description">For any system handling concurrent users, blocking I/O is a bottleneck. 100% async architecture eliminates this.</p>
+          </div>
+          <div class="learning-card glass-card">
+            <span class="learning-icon">🎯</span>
+            <h3 data-i18n="licensingSystem.learningItems.typeSafety.title">Type Safety Saves Time</h3>
+            <p data-i18n="licensingSystem.learningItems.typeSafety.description">The hours spent defining types are repaid in fewer bugs and easier refactoring. TypeScript + Pydantic + Zod.</p>
+          </div>
+          <div class="learning-card glass-card">
+            <span class="learning-icon">🌐</span>
+            <h3 data-i18n="licensingSystem.learningItems.crossPlatform.title">Cross-Platform is Hard</h3>
+            <p data-i18n="licensingSystem.learningItems.crossPlatform.description">Web and desktop have fundamentally different models. Abstracting the differences requires careful design.</p>
+          </div>
+          <div class="learning-card glass-card">
+            <span class="learning-icon">📊</span>
+            <h3 data-i18n="licensingSystem.learningItems.monitoring.title">Monitoring is Not Optional</h3>
+            <p data-i18n="licensingSystem.learningItems.monitoring.description">Without comprehensive logs, debugging production issues is nearly impossible. Log everything.</p>
+          </div>
         </div>
       </div>
     </section>
