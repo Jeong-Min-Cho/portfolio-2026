@@ -1,0 +1,1664 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
+
+const components = [
+  {
+    id: 'backend',
+    titleKey: 'licensingSystem.components.backend.title',
+    title: 'Backend API',
+    tech: [
+      { name: 'Python 3.11+', purpose: 'Primary language' },
+      { name: 'FastAPI 0.109', purpose: 'Async web framework' },
+      { name: 'PostgreSQL 15', purpose: 'Primary database' },
+      { name: 'Redis 7', purpose: 'Session storage, caching, rate limiting' },
+      { name: 'SQLAlchemy 2.0', purpose: 'Async ORM' },
+      { name: 'JWT', purpose: 'Token-based authentication' },
+      { name: 'AES-256-GCM', purpose: 'File encryption' },
+      { name: 'Docker Compose', purpose: 'Containerization' },
+    ],
+    metrics: [
+      { label: 'Source Files', value: '80+' },
+      { label: 'Database Models', value: '32' },
+      { label: 'API Routers', value: '31' },
+      { label: 'Lines of Code', value: '~15,000' },
+    ],
+    features: [
+      'Dual authentication: Web sessions + JWT tokens',
+      'Multi-device support with configurable limits',
+      'Hardware ID (HWID) binding for license protection',
+      'Encrypted file storage (AES-256-GCM)',
+      'Redis-based rate limiting (token bucket algorithm)',
+      'Comprehensive audit logging with geolocation',
+    ],
+  },
+  {
+    id: 'frontend',
+    titleKey: 'licensingSystem.components.frontend.title',
+    title: 'Admin Dashboard & User Portal',
+    tech: [
+      { name: 'Next.js 14', purpose: 'React framework (App Router)' },
+      { name: 'TypeScript 5', purpose: 'Type-safe development' },
+      { name: 'TanStack Query v5', purpose: 'Server state management' },
+      { name: 'Tailwind CSS 3.4', purpose: 'Utility-first styling' },
+      { name: 'shadcn/ui', purpose: 'Component library' },
+      { name: 'Framer Motion', purpose: 'Animations' },
+      { name: 'i18next', purpose: 'Internationalization (Korean/English)' },
+    ],
+    metrics: [
+      { label: 'React Components', value: '129' },
+      { label: 'Custom Hooks', value: '30' },
+      { label: 'Total Pages', value: '42' },
+      { label: 'Lines of Code', value: '~15,000' },
+    ],
+    features: [
+      'Real-time statistics dashboard',
+      'User management with ban/unban controls',
+      'License generation and activation tracking',
+      'Multi-device tracking per user',
+      'JWT token refresh (proactive)',
+      'Mobile-responsive dark/light theme',
+    ],
+  },
+  {
+    id: 'desktop',
+    titleKey: 'licensingSystem.components.desktop.title',
+    title: 'Windows Desktop Client',
+    tech: [
+      { name: 'C++17', purpose: 'Primary language' },
+      { name: 'Visual Studio 2022', purpose: 'Build system' },
+      { name: 'DirectX 11', purpose: 'GUI rendering' },
+      { name: 'ImGui', purpose: 'Immediate mode GUI' },
+      { name: 'WinHTTP', purpose: 'HTTPS communication' },
+      { name: 'ECDSA P-256', purpose: 'Signature verification' },
+      { name: 'HKDF-SHA256', purpose: 'Key derivation' },
+    ],
+    metrics: [
+      { label: 'Source Files', value: '40+' },
+      { label: 'Lines of Code', value: '~12,000' },
+      { label: 'Build Configs', value: '4' },
+    ],
+    features: [
+      'JWT-based authentication with backend API',
+      'In-memory file decryption (no plaintext on disk)',
+      'HWID-based device binding',
+      'Secure credential storage via Windows Credential Manager',
+      'Automatic token refresh',
+      'Modern dark-themed ImGui interface',
+    ],
+  },
+  {
+    id: 'module',
+    titleKey: 'licensingSystem.components.module.title',
+    title: 'Client Module',
+    tech: [
+      { name: 'C++20', purpose: 'Primary language' },
+      { name: 'Dear ImGui', purpose: 'Overlay UI' },
+      { name: 'Lua C API', purpose: 'Script execution' },
+      { name: 'simdjson', purpose: 'JSON parsing' },
+      { name: 'DirectX 11', purpose: 'Overlay rendering' },
+    ],
+    metrics: [
+      { label: 'Source Files', value: '80+' },
+      { label: 'Lines of Code', value: '~40,000' },
+      { label: 'Lua Functions', value: '40+' },
+    ],
+    features: [
+      'Encrypted authentication via shared memory',
+      'Heartbeat validation (periodic license checks)',
+      'Lua scripting for extensibility',
+      'Telegram integration for notifications',
+      'Crash recovery with graceful degradation',
+    ],
+  },
+];
+
+const securityLayers = [
+  {
+    layer: 'Network Security',
+    items: ['HTTPS/TLS for all communications', 'Rate limiting (Redis token bucket)', 'IP blocklist middleware', 'CORS configuration'],
+  },
+  {
+    layer: 'Authentication',
+    items: ['JWT tokens (15 min access, 7 day refresh)', 'HTTP-only session cookies', 'HWID binding', 'Multi-device limits'],
+  },
+  {
+    layer: 'Data Protection',
+    items: ['Argon2id password hashing', 'AES-256-GCM file encryption', 'ECDSA signature verification', 'HKDF key derivation'],
+  },
+  {
+    layer: 'Application Security',
+    items: ['Input validation (Pydantic/Zod)', 'SQL injection prevention', 'XSS prevention (React)', 'CSRF protection'],
+  },
+];
+
+const codeStats = [
+  { component: 'Backend', language: 'Python', loc: '~15,000' },
+  { component: 'Frontend', language: 'TypeScript/React', loc: '~15,000' },
+  { component: 'Desktop Client', language: 'C++', loc: '~12,000' },
+  { component: 'Client Module', language: 'C++', loc: '~40,000' },
+];
+
+const codeExamples = [
+  {
+    title: 'Dual Authentication System',
+    description: 'Supporting both web sessions and desktop JWT tokens with hardware binding',
+    language: 'python',
+    code: `@router.post("/client/login")
+async def client_login(
+    credentials: ClientLoginRequest,
+    db: AsyncSession = Depends(get_db)
+):
+    # Validate credentials
+    user = await authenticate_user(db, credentials.username, credentials.password)
+
+    # Check/register device
+    device = await device_service.get_or_create_device(
+        db, user.id, credentials.hwid
+    )
+
+    # Check device limits
+    if device.is_new and user.device_count >= user.max_devices:
+        raise HTTPException(400, "Device limit reached")
+
+    # Generate tokens
+    access_token = create_access_token(user.id, device.id)
+    refresh_token = create_refresh_token(user.id, device.id)
+
+    return {
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "device_id": device.id
+    }`,
+  },
+  {
+    title: 'AES-256-GCM File Encryption',
+    description: 'Server-side file encryption with authenticated encryption',
+    language: 'python',
+    code: `def encrypt_file(plaintext: bytes, key: bytes) -> bytes:
+    nonce = os.urandom(12)  # 96-bit nonce
+    cipher = Cipher(algorithms.AES(key), modes.GCM(nonce))
+    encryptor = cipher.encryptor()
+    ciphertext = encryptor.update(plaintext) + encryptor.finalize()
+
+    # Format: nonce (12) + ciphertext (variable) + tag (16)
+    return nonce + ciphertext + encryptor.tag
+
+def derive_user_key(user_id: str, access_token: str) -> bytes:
+    hkdf = HKDF(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=user_id.encode(),
+        info=b"file_decryption_key"
+    )
+    return hkdf.derive(access_token.encode())`,
+  },
+  {
+    title: 'In-Memory Decryption (C++)',
+    description: 'Files decrypted entirely in memory - plaintext never touches disk',
+    language: 'cpp',
+    code: `std::vector<uint8_t> DecryptFile(
+    const std::vector<uint8_t>& encrypted,
+    const std::string& userId,
+    const std::string& accessToken
+) {
+    // Derive key using HKDF
+    auto key = HKDF_SHA256(accessToken, userId, "file_key", 32);
+
+    // Extract nonce, ciphertext, and tag
+    auto nonce = std::vector<uint8_t>(
+        encrypted.begin(), encrypted.begin() + 12);
+    auto tag = std::vector<uint8_t>(
+        encrypted.end() - 16, encrypted.end());
+    auto ciphertext = std::vector<uint8_t>(
+        encrypted.begin() + 12, encrypted.end() - 16);
+
+    // Decrypt with AES-256-GCM
+    return AES_GCM_Decrypt(ciphertext, key, nonce, tag);
+}`,
+  },
+  {
+    title: 'Hardware ID Generation',
+    description: 'Stable device identification from multiple hardware components',
+    language: 'cpp',
+    code: `std::string GenerateHWID() {
+    std::string components;
+
+    // CPU ID
+    int cpuInfo[4];
+    __cpuid(cpuInfo, 0);
+    components += std::to_string(cpuInfo[1]) + std::to_string(cpuInfo[3]);
+
+    // Motherboard serial (via WMI)
+    components += GetWMIProperty("Win32_BaseBoard", "SerialNumber");
+
+    // Windows Product ID
+    components += GetRegistryValue(
+        "SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion",
+        "ProductId"
+    );
+
+    // Hash everything together
+    return SHA256(components);
+}`,
+  },
+];
+
+const challenges = [
+  {
+    title: 'Concurrent Token Refresh',
+    problem: 'Multiple API calls could trigger simultaneous token refreshes, causing race conditions.',
+    solution: 'Implemented a request queue that pauses all requests during refresh, then releases them once the new token is available.',
+    language: 'typescript',
+    code: `let isRefreshing = false;
+let refreshQueue: Array<() => void> = [];
+
+async function refreshToken() {
+  if (isRefreshing) {
+    return new Promise((resolve) => refreshQueue.push(resolve));
+  }
+
+  isRefreshing = true;
+  try {
+    const newToken = await api.post("/auth/refresh");
+    setAccessToken(newToken);
+    refreshQueue.forEach((cb) => cb());
+  } finally {
+    isRefreshing = false;
+    refreshQueue = [];
+  }
+}`,
+  },
+  {
+    title: 'Cross-Platform Session Management',
+    problem: 'Web sessions use cookies, but desktop clients cannot use cookies.',
+    solution: 'Implemented parallel authentication systems with a shared session model that handles both session types.',
+    language: 'python',
+    code: `class Session(Base):
+    session_id = Column(UUID, primary_key=True)
+    user_id = Column(UUID, ForeignKey("users.id"))
+    token_hash = Column(String(64))  # SHA-256 of token
+    session_type = Column(Enum("web", "desktop"))
+    device_id = Column(UUID, nullable=True)  # Only for desktop
+    expires_at = Column(DateTime)`,
+  },
+  {
+    title: 'Hardware ID Stability',
+    problem: 'Some HWID components (like MAC addresses) change frequently, causing false "new device" detections.',
+    solution: 'Use only stable components (CPU ID, motherboard serial) and implement similarity checking with 70% threshold.',
+    language: 'cpp',
+    code: `float CalculateHWIDSimilarity(
+    const std::string& stored,
+    const std::string& current
+) {
+    auto storedParts = SplitHWID(stored);
+    auto currentParts = SplitHWID(current);
+
+    int matches = 0;
+    for (size_t i = 0; i < storedParts.size(); i++) {
+        if (storedParts[i] == currentParts[i]) matches++;
+    }
+
+    return (float)matches / storedParts.size();
+}
+
+// Allow if >70% similar (tolerates minor changes)`,
+  },
+];
+
+const learnings = [
+  {
+    icon: '🔐',
+    title: 'Security is Architecture',
+    description: "Security isn't something you add at the end—it must be designed in from the start. Every layer needs consideration.",
+  },
+  {
+    icon: '⚡',
+    title: 'Async is Essential',
+    description: 'For any system handling concurrent users, blocking I/O is a bottleneck. 100% async architecture eliminates this.',
+  },
+  {
+    icon: '🎯',
+    title: 'Type Safety Saves Time',
+    description: 'The hours spent defining types are repaid in fewer bugs and easier refactoring. TypeScript + Pydantic + Zod.',
+  },
+  {
+    icon: '🌐',
+    title: 'Cross-Platform is Hard',
+    description: 'Web and desktop have fundamentally different models. Abstracting the differences requires careful design.',
+  },
+  {
+    icon: '📊',
+    title: 'Monitoring is Not Optional',
+    description: 'Without comprehensive logs, debugging production issues is nearly impossible. Log everything.',
+  },
+];
+---
+
+<Layout title="Software Licensing System | Jeong Min Cho">
+  <div class="project-page">
+    <!-- Top Navigation Bar -->
+    <nav class="project-nav">
+      <a href="/#projects" class="back-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span data-i18n="licensingSystem.backToProjects">Back to Projects</span>
+      </a>
+      <LanguageSwitcher />
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="project-hero">
+      <div class="container">
+        <span class="project-label mono">&lt;project&gt;</span>
+        <h1 class="project-title" data-i18n="licensingSystem.title">Software Licensing & Distribution System</h1>
+        <p class="project-subtitle" data-i18n="licensingSystem.subtitle">
+          A comprehensive full-stack software licensing platform with hardware-based protection,
+          featuring web dashboard, user portal, and secure Windows desktop client.
+        </p>
+
+        <div class="project-meta">
+          <div class="meta-item">
+            <span class="meta-label" data-i18n="licensingSystem.meta.type">Project Type</span>
+            <span class="meta-value" data-i18n="licensingSystem.meta.typeValue">Full-Stack Platform</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label" data-i18n="licensingSystem.meta.codebase">Total Codebase</span>
+            <span class="meta-value">~82,000+ LOC</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label" data-i18n="licensingSystem.meta.role">Role</span>
+            <span class="meta-value" data-i18n="licensingSystem.meta.roleValue">Full-Stack Developer</span>
+          </div>
+        </div>
+
+        <div class="tech-badges">
+          <span class="badge">Python</span>
+          <span class="badge">FastAPI</span>
+          <span class="badge">Next.js</span>
+          <span class="badge">TypeScript</span>
+          <span class="badge">C++</span>
+          <span class="badge">PostgreSQL</span>
+          <span class="badge">Redis</span>
+          <span class="badge">Docker</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- System Architecture -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.architecture.title">System Architecture</h2>
+        <p class="section-desc" data-i18n="licensingSystem.architecture.description">
+          The platform consists of four major components working together to provide secure software licensing and distribution.
+        </p>
+        <div class="diagram-container">
+          <img src="/projects/licensing-system/system-architecture.svg" alt="System Architecture Diagram" class="diagram" />
+        </div>
+        <div class="diagram-details">
+          <h3 data-i18n="licensingSystem.architectureDetails.title">How It All Works Together</h3>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-number">1</span>
+              <div>
+                <strong data-i18n="licensingSystem.architectureDetails.step1.title">Admin creates a license key</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step1.description">Through the Next.js web dashboard, administrators generate license keys with customizable expiration dates and activation limits.</p>
+              </div>
+            </div>
+            <div class="detail-item">
+              <span class="detail-number">2</span>
+              <div>
+                <strong data-i18n="licensingSystem.architectureDetails.step2.title">User downloads the desktop client</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step2.description">End users receive their license key and download the C++ Windows client application.</p>
+              </div>
+            </div>
+            <div class="detail-item">
+              <span class="detail-number">3</span>
+              <div>
+                <strong data-i18n="licensingSystem.architectureDetails.step3.title">Client authenticates with hardware binding</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step3.description">The desktop client sends credentials along with a hardware ID (HWID) to the FastAPI backend, which registers and binds the device.</p>
+              </div>
+            </div>
+            <div class="detail-item">
+              <span class="detail-number">4</span>
+              <div>
+                <strong data-i18n="licensingSystem.architectureDetails.step4.title">Secure file delivery</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step4.description">The client downloads AES-256-GCM encrypted files, decrypts them in memory using HKDF-derived keys, and validates the license periodically via heartbeats.</p>
+              </div>
+            </div>
+            <div class="detail-item">
+              <span class="detail-number">5</span>
+              <div>
+                <strong data-i18n="licensingSystem.architectureDetails.step5.title">Real-time monitoring</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step5.description">All actions are logged to PostgreSQL, cached in Redis, and admins can monitor everything in real-time through the dashboard.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Components -->
+    <section class="section components-section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.componentsTitle">Components</h2>
+
+        <div class="components-grid">
+          {components.map((comp, index) => (
+            <div class="component-card glass-card">
+              <div class="component-header">
+                <span class="component-number">0{index + 1}</span>
+                <h3 class="component-title" data-i18n={comp.titleKey}>{comp.title}</h3>
+              </div>
+
+              <div class="component-content">
+                <div class="tech-stack">
+                  <h4 data-i18n="licensingSystem.techStack">Tech Stack</h4>
+                  <div class="tech-list">
+                    {comp.tech.map(t => (
+                      <div class="tech-item">
+                        <span class="tech-name">{t.name}</span>
+                        <span class="tech-purpose">{t.purpose}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div class="features">
+                  <h4 data-i18n="licensingSystem.keyFeatures">Key Features</h4>
+                  <ul class="feature-list">
+                    {comp.features.map(f => (
+                      <li>{f}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="metrics">
+                  <h4 data-i18n="licensingSystem.metrics">Metrics</h4>
+                  <div class="metrics-grid">
+                    {comp.metrics.map(m => (
+                      <div class="metric">
+                        <span class="metric-value">{m.value}</span>
+                        <span class="metric-label">{m.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Authentication Flow -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.authFlow.title">Authentication Flows</h2>
+        <p class="section-desc" data-i18n="licensingSystem.authFlow.description">
+          Dual authentication system supporting both web dashboard sessions and desktop client JWT tokens.
+        </p>
+        <div class="diagram-container">
+          <img src="/projects/licensing-system/authentication-flows.svg" alt="Authentication Flows Diagram" class="diagram" />
+        </div>
+        <div class="diagram-details">
+          <div class="two-column">
+            <div class="auth-method glass-card">
+              <h4 data-i18n="licensingSystem.authDetails.web.title">Web Dashboard (Session-based)</h4>
+              <div class="auth-flow-steps">
+                <code data-i18n="licensingSystem.authDetails.web.flow">Browser → POST /auth/login → Set HTTP-only cookie → Done</code>
+              </div>
+              <ul>
+                <li data-i18n="licensingSystem.authDetails.web.items.0">HTTP-only cookies prevent XSS token theft</li>
+                <li data-i18n="licensingSystem.authDetails.web.items.1">Session stored in Redis for fast validation</li>
+                <li data-i18n="licensingSystem.authDetails.web.items.2">Automatic CSRF protection</li>
+              </ul>
+            </div>
+            <div class="auth-method glass-card">
+              <h4 data-i18n="licensingSystem.authDetails.desktop.title">Desktop Client (JWT-based)</h4>
+              <div class="auth-flow-steps">
+                <code data-i18n="licensingSystem.authDetails.desktop.flow">Client → POST /auth/client/login (with HWID) → JWT tokens</code>
+              </div>
+              <ul>
+                <li data-i18n="licensingSystem.authDetails.desktop.items.0">Short-lived access tokens (15 minutes)</li>
+                <li data-i18n="licensingSystem.authDetails.desktop.items.1">Long-lived refresh tokens (7 days)</li>
+                <li data-i18n="licensingSystem.authDetails.desktop.items.2">Hardware ID binding for device verification</li>
+                <li data-i18n="licensingSystem.authDetails.desktop.items.3">Proactive token refresh before expiry</li>
+              </ul>
+            </div>
+          </div>
+          <div class="auth-highlight">
+            <strong data-i18n="licensingSystem.authDetails.multiDeviceLabel">Multi-device Support:</strong> <span data-i18n="licensingSystem.authDetails.multiDevice">Users can register up to a configurable number of devices. Each device is tracked independently with nickname, first seen date, and last activity timestamp.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- File Encryption Flow -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.encryption.title">File Encryption Flow</h2>
+        <p class="section-desc" data-i18n="licensingSystem.encryption.description">
+          Secure file delivery with AES-256-GCM encryption and per-user HKDF-derived keys.
+        </p>
+        <div class="diagram-container">
+          <img src="/projects/licensing-system/file-encryption-flow.svg" alt="File Encryption Flow Diagram" class="diagram" />
+        </div>
+        <div class="diagram-details">
+          <div class="encryption-steps">
+            <div class="encryption-step glass-card">
+              <div class="step-icon">🔐</div>
+              <h4 data-i18n="licensingSystem.encryptionDetails.step1.title">Server-Side Encryption</h4>
+              <p data-i18n="licensingSystem.encryptionDetails.step1.description">Files are encrypted with <strong>AES-256-GCM</strong> using a master key. The encrypted format includes a 12-byte nonce, variable-length ciphertext, and 16-byte authentication tag.</p>
+            </div>
+            <div class="encryption-step glass-card">
+              <div class="step-icon">🔑</div>
+              <h4 data-i18n="licensingSystem.encryptionDetails.step2.title">HKDF Key Derivation</h4>
+              <p data-i18n="licensingSystem.encryptionDetails.step2.description">When a user requests a download, a unique decryption key is derived using <strong>HKDF-SHA256</strong> with the user's ID and access token. Keys are derived, not stored—reducing attack surface.</p>
+            </div>
+            <div class="encryption-step glass-card">
+              <div class="step-icon">💾</div>
+              <h4 data-i18n="licensingSystem.encryptionDetails.step3.title">In-Memory Decryption</h4>
+              <p data-i18n="licensingSystem.encryptionDetails.step3.description">The desktop client decrypts files <strong>entirely in memory</strong>. Plaintext never touches the disk, ensuring stolen encrypted files are useless without valid credentials.</p>
+            </div>
+          </div>
+          <div class="security-note">
+            <strong data-i18n="licensingSystem.encryptionDetails.whyMattersLabel">Why This Matters:</strong> <span data-i18n="licensingSystem.encryptionDetails.whyMatters">Each user gets a unique decryption key. Even if an attacker intercepts the encrypted file, they cannot decrypt it without the user's valid access token and user ID.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Architecture -->
+    <section class="section security-section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.security.title">Security Architecture</h2>
+        <p class="section-desc" data-i18n="licensingSystem.security.description">
+          Defense in depth approach with multiple security layers protecting the platform.
+        </p>
+
+        <div class="diagram-container">
+          <img src="/projects/licensing-system/security-architecture.svg" alt="Security Architecture Diagram" class="diagram" />
+        </div>
+
+        <div class="security-layers">
+          {securityLayers.map((layer, index) => (
+            <div class="security-layer glass-card">
+              <div class="layer-header">
+                <span class="layer-number">Layer {index + 1}</span>
+                <h4 class="layer-title">{layer.layer}</h4>
+              </div>
+              <ul class="layer-items">
+                {layer.items.map(item => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Deployment Architecture -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.deployment.title">Deployment Architecture</h2>
+        <p class="section-desc" data-i18n="licensingSystem.deployment.description">
+          Containerized deployment using Docker Compose for easy scaling and management.
+        </p>
+        <div class="diagram-container">
+          <img src="/projects/licensing-system/deployment-architecture.svg" alt="Deployment Architecture Diagram" class="diagram" />
+        </div>
+        <div class="diagram-details">
+          <div class="deployment-grid">
+            <div class="deploy-service glass-card">
+              <h4 data-i18n="licensingSystem.deploymentDetails.postgres.title">PostgreSQL</h4>
+              <span class="port">Port 5433</span>
+              <p data-i18n="licensingSystem.deploymentDetails.postgres.description">Primary database with persistent volume for data durability. Stores users, licenses, sessions, and audit logs.</p>
+            </div>
+            <div class="deploy-service glass-card">
+              <h4 data-i18n="licensingSystem.deploymentDetails.redis.title">Redis</h4>
+              <span class="port">Port 6379</span>
+              <p data-i18n="licensingSystem.deploymentDetails.redis.description">In-memory cache for session storage, rate limiting counters, and frequently accessed data.</p>
+            </div>
+            <div class="deploy-service glass-card">
+              <h4 data-i18n="licensingSystem.deploymentDetails.fastapi.title">FastAPI Backend</h4>
+              <span class="port">Port 8000</span>
+              <p data-i18n="licensingSystem.deploymentDetails.fastapi.description">Async Python API server running on Uvicorn with auto-reload in development mode.</p>
+            </div>
+            <div class="deploy-service glass-card">
+              <h4 data-i18n="licensingSystem.deploymentDetails.nextjs.title">Next.js Frontend</h4>
+              <span class="port">Port 3000</span>
+              <p data-i18n="licensingSystem.deploymentDetails.nextjs.description">React-based dashboard with server-side rendering for optimal performance.</p>
+            </div>
+          </div>
+          <div class="deploy-note">
+            <strong data-i18n="licensingSystem.deploymentDetails.volumesLabel">Persistent Volumes:</strong> <span data-i18n="licensingSystem.deploymentDetails.volumes">postgres_data, redis_data, and file_storage volumes ensure data survives container restarts. All services communicate over an internal Docker network.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Statistics -->
+    <section class="section stats-section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.stats.title">Code Statistics</h2>
+
+        <div class="stats-table glass-card">
+          <div class="stats-header">
+            <span data-i18n="licensingSystem.stats.component">Component</span>
+            <span data-i18n="licensingSystem.stats.language">Language</span>
+            <span data-i18n="licensingSystem.stats.loc">Lines of Code</span>
+          </div>
+          {codeStats.map(stat => (
+            <div class="stats-row">
+              <span class="stat-component">{stat.component}</span>
+              <span class="stat-language mono">{stat.language}</span>
+              <span class="stat-loc gradient-text">{stat.loc}</span>
+            </div>
+          ))}
+          <div class="stats-row stats-total">
+            <span class="stat-component" data-i18n="licensingSystem.stats.total">Total</span>
+            <span class="stat-language">Mixed</span>
+            <span class="stat-loc gradient-text">~82,000+</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Deep Dive -->
+    <section class="section code-section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.deepDive.title">Technical Deep Dive</h2>
+        <p class="section-desc" data-i18n="licensingSystem.deepDive.description">
+          Key implementation details showcasing the security and architecture decisions.
+        </p>
+
+        <div class="code-examples">
+          {codeExamples.map((example) => (
+            <div class="code-example glass-card">
+              <div class="code-header">
+                <h3>{example.title}</h3>
+                <span class="code-lang">{example.language}</span>
+              </div>
+              <p class="code-desc">{example.description}</p>
+              <pre class="code-block"><code class={`language-${example.language}`} set:html={example.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Challenges & Solutions -->
+    <section class="section challenges-section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.challenges.title">Challenges & Solutions</h2>
+        <p class="section-desc" data-i18n="licensingSystem.challenges.description">
+          Complex problems encountered during development and how they were solved.
+        </p>
+
+        <div class="challenges-grid">
+          {challenges.map((challenge, index) => (
+            <div class="challenge-card glass-card">
+              <div class="challenge-number">#{index + 1}</div>
+              <h3 class="challenge-title">{challenge.title}</h3>
+              <div class="challenge-content">
+                <div class="problem">
+                  <span class="label">Problem</span>
+                  <p>{challenge.problem}</p>
+                </div>
+                <div class="solution">
+                  <span class="label">Solution</span>
+                  <p>{challenge.solution}</p>
+                </div>
+                <pre class="code-block small"><code class={`language-${challenge.language}`} set:html={challenge.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')} /></pre>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Learnings -->
+    <section class="section learnings-section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.learnings.title">Key Learnings</h2>
+        <p class="section-desc" data-i18n="licensingSystem.learnings.description">
+          Insights gained from building this production-ready system.
+        </p>
+
+        <div class="learnings-grid">
+          {learnings.map((learning) => (
+            <div class="learning-card glass-card">
+              <span class="learning-icon">{learning.icon}</span>
+              <h3>{learning.title}</h3>
+              <p>{learning.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Overview -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="licensingSystem.techOverview.title">Technology Overview</h2>
+        <div class="diagram-container">
+          <img src="/projects/licensing-system/tech-stack.svg" alt="Tech Stack Overview" class="diagram" />
+        </div>
+        <div class="diagram-details">
+          <h3 data-i18n="licensingSystem.techOverview.whyTitle">Why These Technologies?</h3>
+          <div class="tech-rationale">
+            <div class="tech-category glass-card">
+              <h4 data-i18n="licensingSystem.techOverview.backend.title">Backend: Python + FastAPI</h4>
+              <p><strong data-i18n="licensingSystem.labels.why">Why:</strong> <span data-i18n="licensingSystem.techOverview.backend.description">FastAPI's async-first design handles concurrent API requests efficiently. Type hints with Pydantic provide automatic validation and documentation. SQLAlchemy 2.0's async support ensures non-blocking database operations.</span></p>
+            </div>
+            <div class="tech-category glass-card">
+              <h4 data-i18n="licensingSystem.techOverview.frontend.title">Frontend: Next.js 14 + TypeScript</h4>
+              <p><strong data-i18n="licensingSystem.labels.why">Why:</strong> <span data-i18n="licensingSystem.techOverview.frontend.description">App Router enables server components for optimal performance. TypeScript catches errors at compile time. TanStack Query handles server state with automatic caching and refetching.</span></p>
+            </div>
+            <div class="tech-category glass-card">
+              <h4 data-i18n="licensingSystem.techOverview.desktop.title">Desktop: C++17 with DirectX/ImGui</h4>
+              <p><strong data-i18n="licensingSystem.labels.why">Why:</strong> <span data-i18n="licensingSystem.techOverview.desktop.description">Native performance for cryptographic operations. Direct hardware access for HWID generation. ImGui provides immediate-mode rendering with minimal overhead.</span></p>
+            </div>
+            <div class="tech-category glass-card">
+              <h4 data-i18n="licensingSystem.techOverview.infrastructure.title">Infrastructure: PostgreSQL + Redis + Docker</h4>
+              <p><strong data-i18n="licensingSystem.labels.why">Why:</strong> <span data-i18n="licensingSystem.techOverview.infrastructure.description">PostgreSQL handles complex queries and ACID transactions. Redis provides sub-millisecond caching and session storage. Docker ensures consistent deployment across environments.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="project-footer">
+      <div class="container">
+        <a href="/#projects" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span data-i18n="licensingSystem.backToProjects">Back to Projects</span>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Prism.js for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+  <script is:inline>
+    // Re-run Prism after page load
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof Prism !== 'undefined') {
+        Prism.highlightAll();
+      }
+    });
+  </script>
+</Layout>
+
+<style>
+  .project-page {
+    padding-top: 2rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .project-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 100;
+  }
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  .back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-color: var(--accent-primary);
+  }
+
+  /* Hero Section */
+  .project-hero {
+    padding: 10rem 0 4rem;
+    text-align: center;
+  }
+
+  .project-label {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .project-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .project-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+
+  .project-meta {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .meta-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .meta-value {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .tech-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .badge {
+    padding: 0.5rem 1rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Sections */
+  .section {
+    padding: 5rem 0;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .section-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+
+  /* Diagrams */
+  .diagram-container {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  .diagram {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Diagram Details */
+  .diagram-details {
+    margin-top: 3rem;
+  }
+
+  .diagram-details h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .detail-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .detail-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .detail-item strong {
+    display: block;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .detail-item p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Two Column Layout */
+  .two-column {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .auth-method {
+    padding: 1.5rem;
+  }
+
+  .auth-method h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .auth-flow-steps {
+    margin-bottom: 1rem;
+  }
+
+  .auth-flow-steps code {
+    display: block;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    overflow-x: auto;
+  }
+
+  .auth-method ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .auth-method li {
+    position: relative;
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .auth-method li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+  }
+
+  .auth-highlight,
+  .security-note,
+  .deploy-note {
+    padding: 1rem 1.5rem;
+    background: rgba(99, 102, 241, 0.1);
+    border-left: 3px solid var(--accent-primary);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  .auth-highlight strong,
+  .security-note strong,
+  .deploy-note strong {
+    color: var(--text-primary);
+  }
+
+  /* Encryption Steps */
+  .encryption-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .encryption-step {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .step-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .encryption-step h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .encryption-step p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Deployment Grid */
+  .deployment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .deploy-service {
+    padding: 1.25rem;
+  }
+
+  .deploy-service h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .deploy-service .port {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    background: rgba(99, 102, 241, 0.15);
+    padding: 0.125rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+  }
+
+  .deploy-service p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Tech Rationale */
+  .tech-rationale {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .tech-category {
+    padding: 1.5rem;
+  }
+
+  .tech-category h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .tech-category p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .tech-category strong {
+    color: var(--accent-primary);
+  }
+
+  /* Components Grid */
+  .components-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .component-card {
+    padding: 2rem;
+  }
+
+  .component-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .component-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .component-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .component-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .component-content h4 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+  }
+
+  .tech-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tech-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .tech-name {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+  }
+
+  .tech-purpose {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .feature-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .feature-list li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .metric {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 8px;
+  }
+
+  .metric-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .metric-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* Security Layers */
+  .security-layers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .security-layer {
+    padding: 1.5rem;
+  }
+
+  .layer-header {
+    margin-bottom: 1rem;
+  }
+
+  .layer-number {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-primary);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .layer-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .layer-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .layer-items li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .layer-items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+  }
+
+  /* Stats Table */
+  .stats-table {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .stats-header,
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1rem 1.5rem;
+  }
+
+  .stats-header {
+    background: rgba(99, 102, 241, 0.1);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .stats-row {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .stats-row:last-child {
+    border-bottom: none;
+  }
+
+  .stats-total {
+    background: rgba(99, 102, 241, 0.05);
+    font-weight: 600;
+  }
+
+  .stat-component {
+    color: var(--text-primary);
+  }
+
+  .stat-language {
+    color: var(--text-secondary);
+  }
+
+  .stat-loc {
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* Code Examples */
+  .code-examples {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .code-example {
+    padding: 2rem;
+  }
+
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .code-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .code-lang {
+    padding: 0.25rem 0.75rem;
+    background: rgba(99, 102, 241, 0.2);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+  }
+
+  .code-desc {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .code-block {
+    background: #1a1a2e !important;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem !important;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.85rem !important;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .code-block.small {
+    font-size: 0.8rem !important;
+    padding: 1rem !important;
+  }
+
+  .code-block code {
+    white-space: pre;
+    font-family: 'JetBrains Mono', monospace !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  /* Prism theme overrides */
+  :global(.token.comment),
+  :global(.token.prolog),
+  :global(.token.doctype),
+  :global(.token.cdata) {
+    color: #6a737d;
+  }
+
+  :global(.token.punctuation) {
+    color: #a0a0b0;
+  }
+
+  :global(.token.property),
+  :global(.token.tag),
+  :global(.token.boolean),
+  :global(.token.number),
+  :global(.token.constant),
+  :global(.token.symbol) {
+    color: #79c0ff;
+  }
+
+  :global(.token.selector),
+  :global(.token.attr-name),
+  :global(.token.string),
+  :global(.token.char),
+  :global(.token.builtin) {
+    color: #a5d6ff;
+  }
+
+  :global(.token.operator),
+  :global(.token.entity),
+  :global(.token.url),
+  :global(.token.variable) {
+    color: #ff7b72;
+  }
+
+  :global(.token.atrule),
+  :global(.token.attr-value),
+  :global(.token.keyword) {
+    color: #ff7b72;
+  }
+
+  :global(.token.function),
+  :global(.token.class-name) {
+    color: #d2a8ff;
+  }
+
+  :global(.token.regex),
+  :global(.token.important) {
+    color: #ffa657;
+  }
+
+  /* Challenges */
+  .challenges-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .challenge-card {
+    padding: 2rem;
+  }
+
+  .challenge-number {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.5rem;
+  }
+
+  .challenge-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .challenge-content {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .challenge-content .label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .problem p,
+  .solution p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Learnings */
+  .learnings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .learning-card {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .learning-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .learning-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .learning-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  .project-footer {
+    padding: 4rem 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .project-footer .btn {
+    display: inline-flex;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .project-nav {
+      padding: 1rem 1.25rem;
+    }
+
+    .back-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .back-btn span {
+      display: none;
+    }
+
+    .project-hero {
+      padding: 7rem 0 3rem;
+    }
+
+    .project-meta {
+      gap: 2rem;
+    }
+
+    .component-content {
+      grid-template-columns: 1fr;
+    }
+
+    .tech-item {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .stats-header,
+    .stats-row {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .stats-header {
+      display: none;
+    }
+
+    .stats-row {
+      padding: 1.5rem;
+    }
+
+    .stat-loc {
+      text-align: left;
+    }
+  }
+</style>
