@@ -139,15 +139,15 @@ export const translations = {
             "Troubleshot and resolved network issues under time-sensitive conditions",
           ],
         },
-        sdlcSenior: {
+        ustigers: {
           title: "Fullstack Software Engineer",
           description:
-            "Returned to lead development of enterprise applications with expanded responsibilities.",
+            "Developed fullstack web applications with React and Spring Boot in an Agile environment.",
           highlights: [
-            "Led frontend development with React, building reusable components and implementing state management",
-            "Developed and maintained RESTful APIs using Java and Spring Boot for enterprise client applications",
-            "Deployed and managed applications on AWS using EC2, S3, and RDS for scalability",
-            "Automated build and deployment pipelines with Jenkins and Docker, streamlining CI/CD workflow",
+            "Developed responsive user interfaces with React.js and JavaScript, improving application usability and performance",
+            "Designed and built RESTful APIs using Java and Spring Boot to enable seamless frontend-backend communication",
+            "Deployed and managed applications on AWS, leveraging services such as EC2, S3, and RDS for scalability",
+            "Automated build and deployment pipelines with Jenkins and Docker, streamlining the CI/CD workflow",
             "Collaborated with cross-functional teams in an Agile environment to deliver features on schedule",
           ],
         },
@@ -156,10 +156,10 @@ export const translations = {
           description:
             "Built and enhanced dashboard features for enterprise monitoring platform.",
           highlights: [
-            "Built and enhanced dashboard features using Next.js, React, and GraphQL",
-            "Wrote unit and integration tests improving code reliability and reducing regression issues",
-            "Maintained legacy PHP systems while supporting containerized deployments with Docker",
-            "Identified and resolved bugs across the dashboard, improving UX and system stability",
+            "Built and enhanced dashboard features using Next.js, React, and GraphQL, collaborating with senior engineers to deliver production-ready code",
+            "Wrote unit and integration tests that improved code reliability and reduced regression issues",
+            "Maintained and updated legacy PHP systems while supporting containerized deployments with Docker",
+            "Identified and resolved bugs across the dashboard, improving overall user experience and system stability",
           ],
         },
         sdlcJunior: {
@@ -269,6 +269,108 @@ export const translations = {
       },
       techOverview: {
         title: "Technology Overview",
+        whyTitle: "Why These Technologies?",
+        backend: {
+          title: "Backend: Python + FastAPI",
+          description: "FastAPI's async-first design handles concurrent API requests efficiently. Type hints with Pydantic provide automatic validation and documentation. SQLAlchemy 2.0's async support ensures non-blocking database operations.",
+        },
+        frontend: {
+          title: "Frontend: Next.js 14 + TypeScript",
+          description: "App Router enables server components for optimal performance. TypeScript catches errors at compile time. TanStack Query handles server state with automatic caching and refetching.",
+        },
+        desktop: {
+          title: "Desktop: C++17 with DirectX/ImGui",
+          description: "Native performance for cryptographic operations. Direct hardware access for HWID generation. ImGui provides immediate-mode rendering with minimal overhead.",
+        },
+        infrastructure: {
+          title: "Infrastructure: PostgreSQL + Redis + Docker",
+          description: "PostgreSQL handles complex queries and ACID transactions. Redis provides sub-millisecond caching and session storage. Docker ensures consistent deployment across environments.",
+        },
+      },
+      architectureDetails: {
+        title: "How It All Works Together",
+        step1: {
+          title: "Admin creates a license key",
+          description: "Through the Next.js web dashboard, administrators generate license keys with customizable expiration dates and activation limits.",
+        },
+        step2: {
+          title: "User downloads the desktop client",
+          description: "End users receive their license key and download the C++ Windows client application.",
+        },
+        step3: {
+          title: "Client authenticates with hardware binding",
+          description: "The desktop client sends credentials along with a hardware ID (HWID) to the FastAPI backend, which registers and binds the device.",
+        },
+        step4: {
+          title: "Secure file delivery",
+          description: "The client downloads AES-256-GCM encrypted files, decrypts them in memory using HKDF-derived keys, and validates the license periodically via heartbeats.",
+        },
+        step5: {
+          title: "Real-time monitoring",
+          description: "All actions are logged to PostgreSQL, cached in Redis, and admins can monitor everything in real-time through the dashboard.",
+        },
+      },
+      authDetails: {
+        web: {
+          title: "Web Dashboard (Session-based)",
+          flow: "Browser → POST /auth/login → Set HTTP-only cookie → Done",
+          items: [
+            "HTTP-only cookies prevent XSS token theft",
+            "Session stored in Redis for fast validation",
+            "Automatic CSRF protection",
+          ],
+        },
+        desktop: {
+          title: "Desktop Client (JWT-based)",
+          flow: "Client → POST /auth/client/login (with HWID) → JWT tokens",
+          items: [
+            "Short-lived access tokens (15 minutes)",
+            "Long-lived refresh tokens (7 days)",
+            "Hardware ID binding for device verification",
+            "Proactive token refresh before expiry",
+          ],
+        },
+        multiDeviceLabel: "Multi-device Support:",
+        multiDevice: "Users can register up to a configurable number of devices. Each device is tracked independently with nickname, first seen date, and last activity timestamp.",
+      },
+      encryptionDetails: {
+        step1: {
+          title: "Server-Side Encryption",
+          description: "Files are encrypted with AES-256-GCM using a master key. The encrypted format includes a 12-byte nonce, variable-length ciphertext, and 16-byte authentication tag.",
+        },
+        step2: {
+          title: "HKDF Key Derivation",
+          description: "When a user requests a download, a unique decryption key is derived using HKDF-SHA256 with the user's ID and access token. Keys are derived, not stored—reducing attack surface.",
+        },
+        step3: {
+          title: "In-Memory Decryption",
+          description: "The desktop client decrypts files entirely in memory. Plaintext never touches the disk, ensuring stolen encrypted files are useless without valid credentials.",
+        },
+        whyMattersLabel: "Why This Matters:",
+        whyMatters: "Each user gets a unique decryption key. Even if an attacker intercepts the encrypted file, they cannot decrypt it without the user's valid access token and user ID.",
+      },
+      deploymentDetails: {
+        postgres: {
+          title: "PostgreSQL",
+          description: "Primary database with persistent volume for data durability. Stores users, licenses, sessions, and audit logs.",
+        },
+        redis: {
+          title: "Redis",
+          description: "In-memory cache for session storage, rate limiting counters, and frequently accessed data.",
+        },
+        fastapi: {
+          title: "FastAPI Backend",
+          description: "Async Python API server running on Uvicorn with auto-reload in development mode.",
+        },
+        nextjs: {
+          title: "Next.js Frontend",
+          description: "React-based dashboard with server-side rendering for optimal performance.",
+        },
+        volumesLabel: "Persistent Volumes:",
+        volumes: "postgres_data, redis_data, and file_storage volumes ensure data survives container restarts. All services communicate over an internal Docker network.",
+      },
+      labels: {
+        why: "Why:",
       },
       deepDive: {
         title: "Technical Deep Dive",
@@ -424,16 +526,16 @@ export const translations = {
             "시간에 민감한 상황에서 네트워크 문제 해결 및 장애 조치",
           ],
         },
-        sdlcSenior: {
+        ustigers: {
           title: "풀스택 소프트웨어 엔지니어",
           description:
-            "스타트업에서 책임감있게 애플리케이션 개발을 이끌었습니다.",
+            "Agile 환경에서 React와 Spring Boot를 활용한 풀스택 웹 애플리케이션 개발.",
           highlights: [
-            "React로 프론트엔드 개발 주도, 재사용 가능한 컴포넌트 및 상태 관리 구현",
-            "Java와 Spring Boot를 사용하여 클라이언트용 RESTful API 개발 및 유지보수",
-            "AWS EC2, S3, RDS를 활용한 애플리케이션 배포 및 관리",
+            "React.js와 JavaScript로 반응형 UI 개발, 애플리케이션 사용성 및 성능 향상",
+            "Java와 Spring Boot를 사용하여 프론트엔드-백엔드 원활한 통신을 위한 RESTful API 설계 및 구축",
+            "AWS EC2, S3, RDS 등 서비스를 활용한 애플리케이션 배포 및 관리로 확장성 확보",
             "Jenkins와 Docker로 빌드 및 배포 파이프라인 자동화, CI/CD 워크플로우 간소화",
-            "Agile 환경에서 팀과 협업하여 일정에 맞춰 기능 개발",
+            "Agile 환경에서 여러 팀과 협업하여 일정에 맞춰 기능 개발",
           ],
         },
         sciencelogic: {
@@ -441,10 +543,10 @@ export const translations = {
           description:
             "엔터프라이즈 모니터링 플랫폼의 대시보드 기능을 개발하고 개선했습니다.",
           highlights: [
-            "Next.js, React, GraphQL을 사용하여 대시보드 기능 개발 및 개선",
+            "Next.js, React, GraphQL을 사용하여 대시보드 기능 개발 및 개선, 시니어 엔지니어와 협업하여 프로덕션 레벨 코드 제공",
             "유닛 테스트 및 통합 테스트 작성으로 코드 신뢰성 향상 및 회귀 문제 감소",
-            "레거시 PHP 시스템 유지보수 및 Docker 컨테이너 배포 지원",
-            "대시보드 전반의 버그 식별 및 해결, UX 및 시스템 안정성 개선",
+            "레거시 PHP 시스템 유지보수 및 업데이트, Docker 컨테이너 배포 지원",
+            "대시보드 전반의 버그 식별 및 해결, 전반적인 사용자 경험 및 시스템 안정성 개선",
           ],
         },
         sdlcJunior: {
@@ -555,6 +657,108 @@ export const translations = {
       },
       techOverview: {
         title: "기술 개요",
+        whyTitle: "왜 이 기술들을 선택했나?",
+        backend: {
+          title: "백엔드: Python + FastAPI",
+          description: "FastAPI의 비동기 우선 설계는 동시 API 요청을 효율적으로 처리합니다. Pydantic과 함께 타입 힌트는 자동 검증과 문서화를 제공합니다. SQLAlchemy 2.0의 비동기 지원은 논블로킹 데이터베이스 작업을 보장합니다.",
+        },
+        frontend: {
+          title: "프론트엔드: Next.js 14 + TypeScript",
+          description: "App Router는 최적의 성능을 위한 서버 컴포넌트를 가능하게 합니다. TypeScript는 컴파일 시점에 오류를 잡아냅니다. TanStack Query는 자동 캐싱과 리페칭으로 서버 상태를 처리합니다.",
+        },
+        desktop: {
+          title: "데스크톱: C++17 with DirectX/ImGui",
+          description: "암호화 연산을 위한 네이티브 성능. HWID 생성을 위한 직접적인 하드웨어 접근. ImGui는 최소한의 오버헤드로 즉각적인 렌더링을 제공합니다.",
+        },
+        infrastructure: {
+          title: "인프라: PostgreSQL + Redis + Docker",
+          description: "PostgreSQL은 복잡한 쿼리와 ACID 트랜잭션을 처리합니다. Redis는 밀리초 이하의 캐싱과 세션 저장소를 제공합니다. Docker는 환경 간 일관된 배포를 보장합니다.",
+        },
+      },
+      architectureDetails: {
+        title: "전체 동작 방식",
+        step1: {
+          title: "관리자가 라이선스 키 생성",
+          description: "Next.js 웹 대시보드를 통해 관리자는 맞춤형 만료 날짜와 활성화 제한이 있는 라이선스 키를 생성합니다.",
+        },
+        step2: {
+          title: "사용자가 데스크톱 클라이언트 다운로드",
+          description: "최종 사용자는 라이선스 키를 받고 C++ Windows 클라이언트 애플리케이션을 다운로드합니다.",
+        },
+        step3: {
+          title: "클라이언트가 하드웨어 바인딩으로 인증",
+          description: "데스크톱 클라이언트는 하드웨어 ID(HWID)와 함께 자격 증명을 FastAPI 백엔드로 전송하고, 백엔드는 기기를 등록하고 바인딩합니다.",
+        },
+        step4: {
+          title: "보안 파일 배달",
+          description: "클라이언트는 AES-256-GCM 암호화된 파일을 다운로드하고, HKDF 파생 키를 사용해 메모리에서 복호화하며, 하트비트를 통해 주기적으로 라이선스를 검증합니다.",
+        },
+        step5: {
+          title: "실시간 모니터링",
+          description: "모든 작업은 PostgreSQL에 로깅되고, Redis에 캐싱되며, 관리자는 대시보드를 통해 모든 것을 실시간으로 모니터링할 수 있습니다.",
+        },
+      },
+      authDetails: {
+        web: {
+          title: "웹 대시보드 (세션 기반)",
+          flow: "브라우저 → POST /auth/login → HTTP-only 쿠키 설정 → 완료",
+          items: [
+            "HTTP-only 쿠키로 XSS 토큰 탈취 방지",
+            "빠른 검증을 위해 Redis에 세션 저장",
+            "자동 CSRF 보호",
+          ],
+        },
+        desktop: {
+          title: "데스크톱 클라이언트 (JWT 기반)",
+          flow: "클라이언트 → POST /auth/client/login (HWID 포함) → JWT 토큰",
+          items: [
+            "수명이 짧은 액세스 토큰 (15분)",
+            "수명이 긴 리프레시 토큰 (7일)",
+            "기기 확인을 위한 하드웨어 ID 바인딩",
+            "만료 전 사전 토큰 갱신",
+          ],
+        },
+        multiDeviceLabel: "다중 기기 지원:",
+        multiDevice: "사용자는 설정 가능한 수만큼의 기기를 등록할 수 있습니다. 각 기기는 닉네임, 처음 확인 날짜, 마지막 활동 타임스탬프와 함께 독립적으로 추적됩니다.",
+      },
+      encryptionDetails: {
+        step1: {
+          title: "서버 측 암호화",
+          description: "파일은 마스터 키를 사용하여 AES-256-GCM으로 암호화됩니다. 암호화된 형식에는 12바이트 논스, 가변 길이 암호문, 16바이트 인증 태그가 포함됩니다.",
+        },
+        step2: {
+          title: "HKDF 키 파생",
+          description: "사용자가 다운로드를 요청하면 사용자 ID와 액세스 토큰을 사용하여 HKDF-SHA256으로 고유한 복호화 키가 파생됩니다. 키는 저장되지 않고 파생되어 공격 표면을 줄입니다.",
+        },
+        step3: {
+          title: "인메모리 복호화",
+          description: "데스크톱 클라이언트는 파일을 완전히 메모리에서 복호화합니다. 평문은 디스크에 닿지 않아, 도난당한 암호화 파일은 유효한 자격 증명 없이는 쓸모가 없습니다.",
+        },
+        whyMattersLabel: "왜 중요한가:",
+        whyMatters: "각 사용자는 고유한 복호화 키를 받습니다. 공격자가 암호화된 파일을 가로채더라도 사용자의 유효한 액세스 토큰과 사용자 ID 없이는 복호화할 수 없습니다.",
+      },
+      deploymentDetails: {
+        postgres: {
+          title: "PostgreSQL",
+          description: "데이터 내구성을 위한 영구 볼륨이 있는 기본 데이터베이스. 사용자, 라이선스, 세션, 감사 로그를 저장합니다.",
+        },
+        redis: {
+          title: "Redis",
+          description: "세션 저장, 속도 제한 카운터, 자주 접근하는 데이터를 위한 인메모리 캐시.",
+        },
+        fastapi: {
+          title: "FastAPI 백엔드",
+          description: "개발 모드에서 자동 리로드가 있는 Uvicorn에서 실행되는 비동기 Python API 서버.",
+        },
+        nextjs: {
+          title: "Next.js 프론트엔드",
+          description: "최적의 성능을 위한 서버 사이드 렌더링이 있는 React 기반 대시보드.",
+        },
+        volumesLabel: "영구 볼륨:",
+        volumes: "postgres_data, redis_data, file_storage 볼륨은 컨테이너 재시작 시에도 데이터를 보존합니다. 모든 서비스는 내부 Docker 네트워크를 통해 통신합니다.",
+      },
+      labels: {
+        why: "이유:",
       },
       deepDive: {
         title: "기술 심층 분석",

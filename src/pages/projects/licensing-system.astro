@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
 
 const components = [
   {
@@ -336,13 +337,16 @@ const learnings = [
 
 <Layout title="Software Licensing System | Jeong Min Cho">
   <div class="project-page">
-    <!-- Back Button -->
-    <a href="/#projects" class="back-btn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-      </svg>
-      <span data-i18n="licensingSystem.backToProjects">Back to Projects</span>
-    </a>
+    <!-- Top Navigation Bar -->
+    <nav class="project-nav">
+      <a href="/#projects" class="back-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span data-i18n="licensingSystem.backToProjects">Back to Projects</span>
+      </a>
+      <LanguageSwitcher />
+    </nav>
 
     <!-- Hero Section -->
     <header class="project-hero">
@@ -393,41 +397,41 @@ const learnings = [
           <img src="/projects/licensing-system/system-architecture.svg" alt="System Architecture Diagram" class="diagram" />
         </div>
         <div class="diagram-details">
-          <h3>How It All Works Together</h3>
+          <h3 data-i18n="licensingSystem.architectureDetails.title">How It All Works Together</h3>
           <div class="detail-grid">
             <div class="detail-item">
               <span class="detail-number">1</span>
               <div>
-                <strong>Admin creates a license key</strong>
-                <p>Through the Next.js web dashboard, administrators generate license keys with customizable expiration dates and activation limits.</p>
+                <strong data-i18n="licensingSystem.architectureDetails.step1.title">Admin creates a license key</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step1.description">Through the Next.js web dashboard, administrators generate license keys with customizable expiration dates and activation limits.</p>
               </div>
             </div>
             <div class="detail-item">
               <span class="detail-number">2</span>
               <div>
-                <strong>User downloads the desktop client</strong>
-                <p>End users receive their license key and download the C++ Windows client application.</p>
+                <strong data-i18n="licensingSystem.architectureDetails.step2.title">User downloads the desktop client</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step2.description">End users receive their license key and download the C++ Windows client application.</p>
               </div>
             </div>
             <div class="detail-item">
               <span class="detail-number">3</span>
               <div>
-                <strong>Client authenticates with hardware binding</strong>
-                <p>The desktop client sends credentials along with a hardware ID (HWID) to the FastAPI backend, which registers and binds the device.</p>
+                <strong data-i18n="licensingSystem.architectureDetails.step3.title">Client authenticates with hardware binding</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step3.description">The desktop client sends credentials along with a hardware ID (HWID) to the FastAPI backend, which registers and binds the device.</p>
               </div>
             </div>
             <div class="detail-item">
               <span class="detail-number">4</span>
               <div>
-                <strong>Secure file delivery</strong>
-                <p>The client downloads AES-256-GCM encrypted files, decrypts them in memory using HKDF-derived keys, and validates the license periodically via heartbeats.</p>
+                <strong data-i18n="licensingSystem.architectureDetails.step4.title">Secure file delivery</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step4.description">The client downloads AES-256-GCM encrypted files, decrypts them in memory using HKDF-derived keys, and validates the license periodically via heartbeats.</p>
               </div>
             </div>
             <div class="detail-item">
               <span class="detail-number">5</span>
               <div>
-                <strong>Real-time monitoring</strong>
-                <p>All actions are logged to PostgreSQL, cached in Redis, and admins can monitor everything in real-time through the dashboard.</p>
+                <strong data-i18n="licensingSystem.architectureDetails.step5.title">Real-time monitoring</strong>
+                <p data-i18n="licensingSystem.architectureDetails.step5.description">All actions are logged to PostgreSQL, cached in Redis, and admins can monitor everything in real-time through the dashboard.</p>
               </div>
             </div>
           </div>
@@ -501,31 +505,31 @@ const learnings = [
         <div class="diagram-details">
           <div class="two-column">
             <div class="auth-method glass-card">
-              <h4>Web Dashboard (Session-based)</h4>
+              <h4 data-i18n="licensingSystem.authDetails.web.title">Web Dashboard (Session-based)</h4>
               <div class="auth-flow-steps">
-                <code>Browser → POST /auth/login → Set HTTP-only cookie → Done</code>
+                <code data-i18n="licensingSystem.authDetails.web.flow">Browser → POST /auth/login → Set HTTP-only cookie → Done</code>
               </div>
               <ul>
-                <li>HTTP-only cookies prevent XSS token theft</li>
-                <li>Session stored in Redis for fast validation</li>
-                <li>Automatic CSRF protection</li>
+                <li data-i18n="licensingSystem.authDetails.web.items.0">HTTP-only cookies prevent XSS token theft</li>
+                <li data-i18n="licensingSystem.authDetails.web.items.1">Session stored in Redis for fast validation</li>
+                <li data-i18n="licensingSystem.authDetails.web.items.2">Automatic CSRF protection</li>
               </ul>
             </div>
             <div class="auth-method glass-card">
-              <h4>Desktop Client (JWT-based)</h4>
+              <h4 data-i18n="licensingSystem.authDetails.desktop.title">Desktop Client (JWT-based)</h4>
               <div class="auth-flow-steps">
-                <code>Client → POST /auth/client/login (with HWID) → JWT tokens</code>
+                <code data-i18n="licensingSystem.authDetails.desktop.flow">Client → POST /auth/client/login (with HWID) → JWT tokens</code>
               </div>
               <ul>
-                <li>Short-lived access tokens (15 minutes)</li>
-                <li>Long-lived refresh tokens (7 days)</li>
-                <li>Hardware ID binding for device verification</li>
-                <li>Proactive token refresh before expiry</li>
+                <li data-i18n="licensingSystem.authDetails.desktop.items.0">Short-lived access tokens (15 minutes)</li>
+                <li data-i18n="licensingSystem.authDetails.desktop.items.1">Long-lived refresh tokens (7 days)</li>
+                <li data-i18n="licensingSystem.authDetails.desktop.items.2">Hardware ID binding for device verification</li>
+                <li data-i18n="licensingSystem.authDetails.desktop.items.3">Proactive token refresh before expiry</li>
               </ul>
             </div>
           </div>
           <div class="auth-highlight">
-            <strong>Multi-device Support:</strong> Users can register up to a configurable number of devices. Each device is tracked independently with nickname, first seen date, and last activity timestamp.
+            <strong data-i18n="licensingSystem.authDetails.multiDeviceLabel">Multi-device Support:</strong> <span data-i18n="licensingSystem.authDetails.multiDevice">Users can register up to a configurable number of devices. Each device is tracked independently with nickname, first seen date, and last activity timestamp.</span>
           </div>
         </div>
       </div>
@@ -545,22 +549,22 @@ const learnings = [
           <div class="encryption-steps">
             <div class="encryption-step glass-card">
               <div class="step-icon">🔐</div>
-              <h4>Server-Side Encryption</h4>
-              <p>Files are encrypted with <strong>AES-256-GCM</strong> using a master key. The encrypted format includes a 12-byte nonce, variable-length ciphertext, and 16-byte authentication tag.</p>
+              <h4 data-i18n="licensingSystem.encryptionDetails.step1.title">Server-Side Encryption</h4>
+              <p data-i18n="licensingSystem.encryptionDetails.step1.description">Files are encrypted with <strong>AES-256-GCM</strong> using a master key. The encrypted format includes a 12-byte nonce, variable-length ciphertext, and 16-byte authentication tag.</p>
             </div>
             <div class="encryption-step glass-card">
               <div class="step-icon">🔑</div>
-              <h4>HKDF Key Derivation</h4>
-              <p>When a user requests a download, a unique decryption key is derived using <strong>HKDF-SHA256</strong> with the user's ID and access token. Keys are derived, not stored—reducing attack surface.</p>
+              <h4 data-i18n="licensingSystem.encryptionDetails.step2.title">HKDF Key Derivation</h4>
+              <p data-i18n="licensingSystem.encryptionDetails.step2.description">When a user requests a download, a unique decryption key is derived using <strong>HKDF-SHA256</strong> with the user's ID and access token. Keys are derived, not stored—reducing attack surface.</p>
             </div>
             <div class="encryption-step glass-card">
               <div class="step-icon">💾</div>
-              <h4>In-Memory Decryption</h4>
-              <p>The desktop client decrypts files <strong>entirely in memory</strong>. Plaintext never touches the disk, ensuring stolen encrypted files are useless without valid credentials.</p>
+              <h4 data-i18n="licensingSystem.encryptionDetails.step3.title">In-Memory Decryption</h4>
+              <p data-i18n="licensingSystem.encryptionDetails.step3.description">The desktop client decrypts files <strong>entirely in memory</strong>. Plaintext never touches the disk, ensuring stolen encrypted files are useless without valid credentials.</p>
             </div>
           </div>
           <div class="security-note">
-            <strong>Why This Matters:</strong> Each user gets a unique decryption key. Even if an attacker intercepts the encrypted file, they cannot decrypt it without the user's valid access token and user ID.
+            <strong data-i18n="licensingSystem.encryptionDetails.whyMattersLabel">Why This Matters:</strong> <span data-i18n="licensingSystem.encryptionDetails.whyMatters">Each user gets a unique decryption key. Even if an attacker intercepts the encrypted file, they cannot decrypt it without the user's valid access token and user ID.</span>
           </div>
         </div>
       </div>
@@ -609,28 +613,28 @@ const learnings = [
         <div class="diagram-details">
           <div class="deployment-grid">
             <div class="deploy-service glass-card">
-              <h4>PostgreSQL</h4>
+              <h4 data-i18n="licensingSystem.deploymentDetails.postgres.title">PostgreSQL</h4>
               <span class="port">Port 5433</span>
-              <p>Primary database with persistent volume for data durability. Stores users, licenses, sessions, and audit logs.</p>
+              <p data-i18n="licensingSystem.deploymentDetails.postgres.description">Primary database with persistent volume for data durability. Stores users, licenses, sessions, and audit logs.</p>
             </div>
             <div class="deploy-service glass-card">
-              <h4>Redis</h4>
+              <h4 data-i18n="licensingSystem.deploymentDetails.redis.title">Redis</h4>
               <span class="port">Port 6379</span>
-              <p>In-memory cache for session storage, rate limiting counters, and frequently accessed data.</p>
+              <p data-i18n="licensingSystem.deploymentDetails.redis.description">In-memory cache for session storage, rate limiting counters, and frequently accessed data.</p>
             </div>
             <div class="deploy-service glass-card">
-              <h4>FastAPI Backend</h4>
+              <h4 data-i18n="licensingSystem.deploymentDetails.fastapi.title">FastAPI Backend</h4>
               <span class="port">Port 8000</span>
-              <p>Async Python API server running on Uvicorn with auto-reload in development mode.</p>
+              <p data-i18n="licensingSystem.deploymentDetails.fastapi.description">Async Python API server running on Uvicorn with auto-reload in development mode.</p>
             </div>
             <div class="deploy-service glass-card">
-              <h4>Next.js Frontend</h4>
+              <h4 data-i18n="licensingSystem.deploymentDetails.nextjs.title">Next.js Frontend</h4>
               <span class="port">Port 3000</span>
-              <p>React-based dashboard with server-side rendering for optimal performance.</p>
+              <p data-i18n="licensingSystem.deploymentDetails.nextjs.description">React-based dashboard with server-side rendering for optimal performance.</p>
             </div>
           </div>
           <div class="deploy-note">
-            <strong>Persistent Volumes:</strong> postgres_data, redis_data, and file_storage volumes ensure data survives container restarts. All services communicate over an internal Docker network.
+            <strong data-i18n="licensingSystem.deploymentDetails.volumesLabel">Persistent Volumes:</strong> <span data-i18n="licensingSystem.deploymentDetails.volumes">postgres_data, redis_data, and file_storage volumes ensure data survives container restarts. All services communicate over an internal Docker network.</span>
           </div>
         </div>
       </div>
@@ -744,23 +748,23 @@ const learnings = [
           <img src="/projects/licensing-system/tech-stack.svg" alt="Tech Stack Overview" class="diagram" />
         </div>
         <div class="diagram-details">
-          <h3>Why These Technologies?</h3>
+          <h3 data-i18n="licensingSystem.techOverview.whyTitle">Why These Technologies?</h3>
           <div class="tech-rationale">
             <div class="tech-category glass-card">
-              <h4>Backend: Python + FastAPI</h4>
-              <p><strong>Why:</strong> FastAPI's async-first design handles concurrent API requests efficiently. Type hints with Pydantic provide automatic validation and documentation. SQLAlchemy 2.0's async support ensures non-blocking database operations.</p>
+              <h4 data-i18n="licensingSystem.techOverview.backend.title">Backend: Python + FastAPI</h4>
+              <p><strong data-i18n="licensingSystem.labels.why">Why:</strong> <span data-i18n="licensingSystem.techOverview.backend.description">FastAPI's async-first design handles concurrent API requests efficiently. Type hints with Pydantic provide automatic validation and documentation. SQLAlchemy 2.0's async support ensures non-blocking database operations.</span></p>
             </div>
             <div class="tech-category glass-card">
-              <h4>Frontend: Next.js 14 + TypeScript</h4>
-              <p><strong>Why:</strong> App Router enables server components for optimal performance. TypeScript catches errors at compile time. TanStack Query handles server state with automatic caching and refetching.</p>
+              <h4 data-i18n="licensingSystem.techOverview.frontend.title">Frontend: Next.js 14 + TypeScript</h4>
+              <p><strong data-i18n="licensingSystem.labels.why">Why:</strong> <span data-i18n="licensingSystem.techOverview.frontend.description">App Router enables server components for optimal performance. TypeScript catches errors at compile time. TanStack Query handles server state with automatic caching and refetching.</span></p>
             </div>
             <div class="tech-category glass-card">
-              <h4>Desktop: C++17 with DirectX/ImGui</h4>
-              <p><strong>Why:</strong> Native performance for cryptographic operations. Direct hardware access for HWID generation. ImGui provides immediate-mode rendering with minimal overhead.</p>
+              <h4 data-i18n="licensingSystem.techOverview.desktop.title">Desktop: C++17 with DirectX/ImGui</h4>
+              <p><strong data-i18n="licensingSystem.labels.why">Why:</strong> <span data-i18n="licensingSystem.techOverview.desktop.description">Native performance for cryptographic operations. Direct hardware access for HWID generation. ImGui provides immediate-mode rendering with minimal overhead.</span></p>
             </div>
             <div class="tech-category glass-card">
-              <h4>Infrastructure: PostgreSQL + Redis + Docker</h4>
-              <p><strong>Why:</strong> PostgreSQL handles complex queries and ACID transactions. Redis provides sub-millisecond caching and session storage. Docker ensures consistent deployment across environments.</p>
+              <h4 data-i18n="licensingSystem.techOverview.infrastructure.title">Infrastructure: PostgreSQL + Redis + Docker</h4>
+              <p><strong data-i18n="licensingSystem.labels.why">Why:</strong> <span data-i18n="licensingSystem.techOverview.infrastructure.description">PostgreSQL handles complex queries and ACID transactions. Redis provides sub-millisecond caching and session storage. Docker ensures consistent deployment across environments.</span></p>
             </div>
           </div>
         </div>
@@ -807,23 +811,33 @@ const learnings = [
     padding: 0 2rem;
   }
 
-  .back-btn {
+  .project-nav {
     position: fixed;
-    top: 2rem;
-    left: 2rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 100;
+  }
+
+  .back-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.25rem;
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     border-radius: 50px;
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    z-index: 100;
   }
 
   .back-btn:hover {
@@ -834,7 +848,7 @@ const learnings = [
 
   /* Hero Section */
   .project-hero {
-    padding: 8rem 0 4rem;
+    padding: 10rem 0 4rem;
     text-align: center;
   }
 
@@ -1599,13 +1613,21 @@ const learnings = [
 
   /* Responsive */
   @media (max-width: 768px) {
+    .project-nav {
+      padding: 1rem 1.25rem;
+    }
+
     .back-btn {
-      position: static;
-      margin: 0 2rem 2rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .back-btn span {
+      display: none;
     }
 
     .project-hero {
-      padding: 4rem 0 3rem;
+      padding: 7rem 0 3rem;
     }
 
     .project-meta {
