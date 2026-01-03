@@ -1,12 +1,14 @@
 ---
 const projects = [
   {
-    title: 'Software Licensing System',
+    title: 'ShieldMod',
     descriptionKey: 'projects.items.licensingSystem.description',
     description: 'A comprehensive full-stack software licensing platform with hardware-based protection, featuring web dashboard, user portal, and secure Windows desktop client. 82,000+ lines of code across Python, TypeScript, and C++.',
-    image: '/projects/licensing-system/tech-stack.svg',
+    image: '/projects/shieldmod.png',
     tags: ['FastAPI', 'Next.js', 'C++', 'PostgreSQL', 'Docker'],
     detailUrl: '/projects/licensing-system',
+    liveUrl: 'https://shieldmod.online/',
+    blogUrl: 'https://jeong-min-cho.github.io/posts/building-shieldmod-a-full-stack-licensing-platform/',
     featured: true,
   },
   {
@@ -123,6 +125,15 @@ const otherProjects = projects.filter(p => !p.featured);
                       <line x1="10" y1="14" x2="21" y2="3"></line>
                     </svg>
                     <span data-i18n="projects.liveDemo">Live Demo</span>
+                  </a>
+                )}
+                {project.blogUrl && (
+                  <a href={project.blogUrl} target="_blank" rel="noopener noreferrer" class="overlay-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span data-i18n="projects.blogPost">Blog Post</span>
                   </a>
                 )}
                 {project.githubUrl && (
@@ -272,21 +283,31 @@ const otherProjects = projects.filter(p => !p.featured);
 
   .overlay-content {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 1rem;
   }
 
   .overlay-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
+    gap: 0.35rem;
+    padding: 0.5rem 0.75rem;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
+    border-radius: 6px;
     color: var(--text-primary);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .overlay-btn svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
   }
 
   .overlay-btn:hover {
