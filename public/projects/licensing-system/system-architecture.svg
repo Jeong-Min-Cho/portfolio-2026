@@ -122,17 +122,8 @@
     <text x="450" y="480" text-anchor="middle" fill="#fff" font-family="Segoe UI, sans-serif" font-size="16" font-weight="bold">External Integrations</text>
     
     <!-- Integration items -->
-    <rect x="130" y="495" width="130" height="40" rx="6" fill="#334155"/>
-    <text x="195" y="520" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="12">Telegram Bot</text>
-    
-    <rect x="280" y="495" width="130" height="40" rx="6" fill="#334155"/>
-    <text x="345" y="520" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="12">OCR API</text>
-    
-    <rect x="430" y="495" width="130" height="40" rx="6" fill="#334155"/>
-    <text x="495" y="520" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="12">Monitoring</text>
-    
-    <rect x="580" y="495" width="180" height="40" rx="6" fill="#334155"/>
-    <text x="670" y="520" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="12">Korean OCR Service</text>
+    <rect x="385" y="495" width="130" height="40" rx="6" fill="#334155"/>
+    <text x="450" y="520" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="12">Monitoring</text>
   </g>
   
   <!-- Connection from Backend to External -->

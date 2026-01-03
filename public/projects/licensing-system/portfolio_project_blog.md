@@ -47,12 +47,12 @@ The platform consists of four interconnected components:
 │           │  (FastAPI)  │                                       │
 │           └──────┬──────┘                                       │
 │                  │                                              │
-│        ┌─────────┼─────────┐                                    │
-│        ▼         ▼         ▼                                    │
-│   ┌────────┐ ┌───────┐ ┌────────┐                              │
-│   │Postgres│ │ Redis │ │Telegram│                              │
-│   │   DB   │ │ Cache │ │  Bot   │                              │
-│   └────────┘ └───────┘ └────────┘                              │
+│        ┌─────────┴─────────┐                                    │
+│        ▼                   ▼                                    │
+│   ┌────────┐          ┌───────┐                                │
+│   │Postgres│          │ Redis │                                │
+│   │   DB   │          │ Cache │                                │
+│   └────────┘          └───────┘                                │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -437,7 +437,6 @@ The client module extends the main application with:
 
 - License validation via periodic heartbeats
 - Lua scripting for extensibility
-- Telegram notifications for alerts
 - Comprehensive logging
 
 ### Heartbeat System
@@ -550,7 +549,7 @@ Security was a primary concern throughout development. Here's how I approached i
 ### Layer 4: Monitoring
 
 - **Comprehensive audit logs** — Every action is recorded with timestamp, IP, and user agent
-- **Real-time alerts** — Suspicious activity triggers Telegram notifications
+- **Real-time alerts** — Suspicious activity triggers notifications
 - **Session tracking** — All active sessions visible in dashboard
 
 ---
