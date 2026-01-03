@@ -36,9 +36,9 @@ A comprehensive full-stack software licensing and distribution platform with har
 │                                                                             │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │                      External Integrations                           │   │
-│  ├──────────────┬──────────────┬──────────────┬────────────────────────┤   │
-│  │ Telegram Bot │   OCR API    │  Monitoring  │   Korean OCR Service   │   │
-│  └──────────────┴──────────────┴──────────────┴────────────────────────┘   │
+│  ├─────────────────────────────────────────────────────────────────────┤   │
+│  │                            Monitoring                                │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -119,8 +119,6 @@ Users ──┬── Sessions
 - Device management (register, remove, analytics)
 - Dashboard analytics
 - Audit logs with filtering and export
-- Telegram integration
-- OCR processing
 
 ### Code Metrics
 
@@ -190,7 +188,6 @@ Users ──┬── Sessions
 - License information display
 - Download history
 - Session management
-- Telegram integration setup
 
 **Security & UX**
 
@@ -299,12 +296,6 @@ Users ──┬── Sessions
 - Safe script execution with error handling
 - Queue-based script management
 - State validation and recovery
-
-**Telegram Integration**
-
-- Real-time notifications
-- Command polling for remote control
-- Status updates and alerts
 
 **Monitoring & Logging**
 
@@ -537,11 +528,6 @@ Users ──┬── Sessions
    - Top-level exception handling
    - Graceful state recovery
    - Comprehensive error logging
-
-3. **Telegram Integration**
-   - Real-time notifications
-   - Remote command support
-   - Status monitoring
 
 ---
 
