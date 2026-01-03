@@ -107,7 +107,6 @@ const components = [
       'Encrypted authentication via shared memory',
       'Heartbeat validation (periodic license checks)',
       'Lua scripting for extensibility',
-      'Telegram integration for notifications',
       'Crash recovery with graceful degradation',
     ],
   },
@@ -266,7 +265,7 @@ async function refreshToken() {
     <header class="project-hero">
       <div class="container">
         <span class="project-label mono">&lt;project&gt;</span>
-        <h1 class="project-title" data-i18n="licensingSystem.title">Software Licensing & Distribution System</h1>
+        <h1 class="project-title" data-i18n="licensingSystem.title">ShieldMod</h1>
         <p class="project-subtitle" data-i18n="licensingSystem.subtitle">
           A comprehensive full-stack software licensing platform with hardware-based protection,
           featuring web dashboard, user portal, and secure Windows desktop client.
@@ -296,6 +295,24 @@ async function refreshToken() {
           <span class="badge">PostgreSQL</span>
           <span class="badge">Redis</span>
           <span class="badge">Docker</span>
+        </div>
+
+        <div class="project-links">
+          <a href="https://shieldmod.online/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            <span data-i18n="licensingSystem.links.saas">Live SaaS</span>
+          </a>
+          <a href="https://jeong-min-cho.github.io/posts/building-shieldmod-a-full-stack-licensing-platform/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+            <span data-i18n="licensingSystem.links.blogPost">Blog Post</span>
+          </a>
         </div>
       </div>
     </header>
@@ -938,6 +955,38 @@ async function refreshToken() {
     font-size: 0.9rem;
     color: var(--accent-primary);
     font-family: 'JetBrains Mono', monospace;
+  }
+
+  .project-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border-radius: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  }
+
+  .project-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  }
+
+  .project-link svg {
+    flex-shrink: 0;
   }
 
   /* Sections */

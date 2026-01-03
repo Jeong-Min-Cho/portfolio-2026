@@ -56,6 +56,7 @@ export const translations = {
       liveDemo: "Live Demo",
       source: "Source",
       viewDetails: "View Details",
+      blogPost: "Blog Post",
       items: {
         licensingSystem: {
           description:
@@ -126,7 +127,6 @@ export const translations = {
             "Built fullstack SaaS platform with Next.js 14, TypeScript frontend backed by FastAPI and PostgreSQL",
             "Developed secure license management system with HWID binding, JWT authentication, and AES-256 encryption",
             "Created Windows desktop client in C++17 with ImGui, featuring auto-updates and server-based authentication",
-            "Integrated third-party APIs including Telegram Bot for notifications and OCR services for text recognition",
           ],
         },
         army: {
@@ -215,7 +215,11 @@ export const translations = {
     // Licensing System Project Page
     licensingSystem: {
       backToProjects: "Back to Projects",
-      title: "Software Licensing & Distribution System",
+      title: "ShieldMod",
+      links: {
+        saas: "Live SaaS",
+        blogPost: "Blog Post",
+      },
       subtitle:
         "A comprehensive full-stack software licensing platform with hardware-based protection, featuring web dashboard, user portal, and secure Windows desktop client.",
       meta: {
@@ -543,6 +547,7 @@ export const translations = {
       liveDemo: "라이브 데모",
       source: "소스 코드",
       viewDetails: "자세히 보기",
+      blogPost: "블로그 포스트",
       items: {
         licensingSystem: {
           description:
@@ -613,7 +618,6 @@ export const translations = {
             "Next.js 14, TypeScript 프론트엔드와 FastAPI, PostgreSQL 백엔드로 풀스택 SaaS 플랫폼 구축",
             "HWID 바인딩, JWT 인증, AES-256 암호화를 적용한 보안 라이선스 관리 시스템 개발",
             "ImGui를 활용한 C++17 Windows 데스크톱 클라이언트 제작, 자동 업데이트 및 서버 기반 인증 구현",
-            "Telegram Bot 알림 및 OCR 텍스트 인식 서비스 등 서드파티 API 연동",
           ],
         },
         army: {
@@ -703,7 +707,11 @@ export const translations = {
     // Licensing System Project Page
     licensingSystem: {
       backToProjects: "프로젝트로 돌아가기",
-      title: "소프트웨어 라이선싱 & 배포 시스템",
+      title: "ShieldMod",
+      links: {
+        saas: "라이브 SaaS",
+        blogPost: "블로그 포스트",
+      },
       subtitle:
         "하드웨어 기반 보호 기능을 갖춘 풀스택 소프트웨어 라이선싱 플랫폼입니다. 웹 대시보드, 사용자 포털, 보안 Windows 데스크톱 클라이언트를 포함합니다.",
       meta: {
