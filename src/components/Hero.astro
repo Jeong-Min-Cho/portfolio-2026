@@ -140,48 +140,15 @@ const socialLinks = [
   }
 
   .hero-particles {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
+    display: none;
   }
 
   .particle {
-    position: absolute;
-    width: var(--size);
-    height: var(--size);
-    background: var(--accent-primary);
-    border-radius: 50%;
-    left: var(--x);
-    bottom: -10%;
-    opacity: 0.6;
-    animation: float var(--duration) ease-in-out infinite;
-    animation-delay: var(--delay);
-  }
-
-  @keyframes float {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 0;
-    }
-    10% { opacity: 0.6; }
-    90% { opacity: 0.6; }
-    100% {
-      transform: translateY(-100vh) rotate(720deg);
-      opacity: 0;
-    }
+    display: none;
   }
 
   .hero-glow {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 70%);
-    filter: blur(80px);
-    pointer-events: none;
+    display: none;
   }
 
   .hero-container {
@@ -199,23 +166,25 @@ const socialLinks = [
     display: inline-flex;
     align-items: center;
     gap: 0.625rem;
-    padding: 0.5rem 1rem;
-    background: rgba(99, 102, 241, 0.1);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 2px solid var(--accent-primary);
+    border-radius: 0;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--accent-primary);
     margin-bottom: 2rem;
     animation: fadeInUp 0.8s ease forwards;
     font-family: 'Inter', 'Noto Sans KR', system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .badge-dot {
     width: 8px;
     height: 8px;
-    background: #22c55e;
-    border-radius: 50%;
+    background: var(--accent-primary);
+    border-radius: 0;
     animation: pulse 2s ease-in-out infinite;
   }
 
@@ -302,18 +271,18 @@ const socialLinks = [
     justify-content: center;
     width: 44px;
     height: 44px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 0;
     color: var(--text-secondary);
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
   }
 
   .social-link:hover {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.08);
+    color: var(--bg-primary);
+    background: var(--accent-primary);
     border-color: var(--accent-primary);
-    transform: translateY(-2px);
+    transform: translate(2px, 2px);
   }
 
   .hero-visual {
@@ -334,10 +303,10 @@ const socialLinks = [
 
   .code-window {
     background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
+    border: 4px solid var(--accent-primary);
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: 12px 12px 0 rgba(255, 69, 0, 0.3);
   }
 
   .window-header {
@@ -345,16 +314,16 @@ const socialLinks = [
     align-items: center;
     gap: 1rem;
     padding: 1rem 1.25rem;
-    background: var(--bg-tertiary);
-    border-bottom: 1px solid var(--border-color);
+    background: var(--accent-primary);
+    border-bottom: none;
   }
 
   .window-dots { display: flex; gap: 8px; }
-  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot { width: 12px; height: 12px; border-radius: 0; }
   .dot.red { background: #ff5f57; }
   .dot.yellow { background: #febc2e; }
   .dot.green { background: #28c840; }
-  .window-title { font-size: 0.8rem; color: var(--text-muted); }
+  .window-title { font-size: 0.8rem; color: var(--bg-primary); font-weight: 700; }
 
   .window-content {
     padding: 1.5rem;
@@ -374,22 +343,33 @@ const socialLinks = [
     position: absolute;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    padding: 0.625rem 1rem;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    animation: floatBadge 6s ease-in-out infinite;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 69, 0, 0.85);
+    border: 3px solid var(--accent-primary);
+    border-radius: 0;
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: var(--bg-primary);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+    animation: none;
     font-family: 'Inter', 'Noto Sans KR', system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    z-index: 10;
+    transition: all 0.15s ease;
+    pointer-events: none;
   }
 
-  .badge-1 { top: -1rem; right: -1rem; animation-delay: 0s; }
-  .badge-2 { bottom: 4rem; left: -2rem; animation-delay: -2s; }
-  .badge-3 { bottom: -0.5rem; right: 2rem; animation-delay: -4s; }
+  .floating-badge:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  .badge-1 { top: -3rem; right: -6rem; }
+  .badge-2 { bottom: -4rem; left: -3rem; }
+  .badge-3 { top: 50%; right: -8rem; transform: translateY(-50%); }
 
   @keyframes floatBadge {
     0%, 100% { transform: translateY(0); }
