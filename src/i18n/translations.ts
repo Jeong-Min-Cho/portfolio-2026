@@ -6,6 +6,7 @@ export const translations = {
       projects: "Projects",
       skills: "Skills",
       experience: "Experience",
+      achievements: "Recognition",
       contact: "Contact",
       blog: "Blog",
       letsTalk: "Let's Talk",
@@ -44,6 +45,34 @@ export const translations = {
         companies: "Companies",
         gpa: "GPA",
         technologies: "Technologies",
+      },
+    },
+
+    // Achievements Section
+    achievements: {
+      title: "Awards & Recognition",
+      subtitle: "Recognized for innovation and excellence",
+      items: {
+        newspaper: {
+          title: "Featured in a Newspaper",
+          description: "Interviewed with George Mason University newspaper about my web browser extension (Chrome, Firefox, Edge)",
+        },
+        bestFinancial: {
+          title: "Best Financial Hack",
+          description: "Winner at PatriotHack2021 - George Mason University",
+        },
+        secondPlace: {
+          title: "2nd Place Hackathon",
+          description: "Winner at StudentHack2020 - University of Manchester",
+        },
+        firstPlace: {
+          title: "1st Place Hackathon",
+          description: "Winner at SkyHacks2020 - University of Tennessee at Martin",
+        },
+        thirdPlace: {
+          title: "3rd Place Hackathon",
+          description: "Winner at ProfHacks2020 - Rowan University",
+        },
       },
     },
 
@@ -498,6 +527,7 @@ export const translations = {
       projects: "프로젝트",
       skills: "기술",
       experience: "경력",
+      achievements: "수상",
       contact: "연락처",
       blog: "블로그",
       letsTalk: "연락하기",
@@ -536,6 +566,34 @@ export const translations = {
         companies: "개 회사",
         gpa: "학점",
         technologies: "개 이상 기술",
+      },
+    },
+
+    // Achievements Section
+    achievements: {
+      title: "수상내역",
+      subtitle: "혁신과 우수성으로 인정받은 경력",
+      items: {
+        newspaper: {
+          title: "신문에 소개됨",
+          description: "George Mason University 신문사와의 인터뷰 - 웹 브라우저 익스텐션(Chrome, Firefox, Edge)에 대해",
+        },
+        bestFinancial: {
+          title: "최우수 금융 해킹",
+          description: "PatriotHack2021 우승 - George Mason University",
+        },
+        secondPlace: {
+          title: "2위 해커톤",
+          description: "StudentHack2020 우승 - University of Manchester",
+        },
+        firstPlace: {
+          title: "1위 해커톤",
+          description: "SkyHacks2020 우승 - University of Tennessee at Martin",
+        },
+        thirdPlace: {
+          title: "3위 해커톤",
+          description: "ProfHacks2020 우승 - Rowan University",
+        },
       },
     },
 
