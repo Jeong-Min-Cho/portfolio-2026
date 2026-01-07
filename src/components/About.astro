@@ -54,7 +54,7 @@ const stats = [
         </div>
 
         <div class="about-cta reveal">
-          <a href="/resume/Jeong_Min_Cho_resume.pdf" class="btn btn-primary" target="_blank">
+          <a id="resume-link" href="/resume/Jeong_Min_Cho_resume_EN.pdf" class="btn btn-primary" target="_blank">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
@@ -63,6 +63,26 @@ const stats = [
             <span data-i18n="about.downloadResume">Download Resume</span>
           </a>
         </div>
+
+        <script>
+          (function() {
+            const resumeUrls = {
+              en: '/resume/Jeong_Min_Cho_resume_EN.pdf',
+              ko: '/resume/Jeong_Min_Cho_Resume_KR.pdf'
+            };
+
+            function updateResumeLink() {
+              const link = document.getElementById('resume-link');
+              if (link) {
+                const lang = window.currentLang || 'en';
+                link.href = resumeUrls[lang] || resumeUrls.en;
+              }
+            }
+
+            document.addEventListener('DOMContentLoaded', updateResumeLink);
+            window.addEventListener('languageChanged', updateResumeLink);
+          })();
+        </script>
 
         <span class="section-label-end reveal mono">&lt;/about&gt;</span>
       </div>
