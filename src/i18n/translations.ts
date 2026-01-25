@@ -55,7 +55,8 @@ export const translations = {
       items: {
         newspaper: {
           title: "Featured in a Newspaper",
-          description: "Interviewed with George Mason University newspaper about my web browser extension (Chrome, Firefox, Edge)",
+          description:
+            "Interviewed with George Mason University newspaper about my web browser extension (Chrome, Firefox, Edge)",
         },
         bestFinancial: {
           title: "Best Financial Hack",
@@ -67,7 +68,8 @@ export const translations = {
         },
         firstPlace: {
           title: "1st Place Hackathon",
-          description: "Winner at SkyHacks2020 - University of Tennessee at Martin",
+          description:
+            "Winner at SkyHacks2020 - University of Tennessee at Martin",
         },
         thirdPlace: {
           title: "3rd Place Hackathon",
@@ -181,7 +183,7 @@ export const translations = {
           ],
         },
         sciencelogic: {
-          title: "Software Engineer",
+          title: "Associate Engineer",
           description:
             "Built and enhanced dashboard features for enterprise monitoring platform.",
           highlights: [
@@ -305,42 +307,51 @@ export const translations = {
         whyTitle: "Why These Technologies?",
         backend: {
           title: "Backend: Python + FastAPI",
-          description: "FastAPI's async-first design handles concurrent API requests efficiently. Type hints with Pydantic provide automatic validation and documentation. SQLAlchemy 2.0's async support ensures non-blocking database operations.",
+          description:
+            "FastAPI's async-first design handles concurrent API requests efficiently. Type hints with Pydantic provide automatic validation and documentation. SQLAlchemy 2.0's async support ensures non-blocking database operations.",
         },
         frontend: {
           title: "Frontend: Next.js 14 + TypeScript",
-          description: "App Router enables server components for optimal performance. TypeScript catches errors at compile time. TanStack Query handles server state with automatic caching and refetching.",
+          description:
+            "App Router enables server components for optimal performance. TypeScript catches errors at compile time. TanStack Query handles server state with automatic caching and refetching.",
         },
         desktop: {
           title: "Desktop: C++17 with DirectX/ImGui",
-          description: "Native performance for cryptographic operations. Direct hardware access for HWID generation. ImGui provides immediate-mode rendering with minimal overhead.",
+          description:
+            "Native performance for cryptographic operations. Direct hardware access for HWID generation. ImGui provides immediate-mode rendering with minimal overhead.",
         },
         infrastructure: {
           title: "Infrastructure: PostgreSQL + Redis + Docker",
-          description: "PostgreSQL handles complex queries and ACID transactions. Redis provides sub-millisecond caching and session storage. Docker ensures consistent deployment across environments.",
+          description:
+            "PostgreSQL handles complex queries and ACID transactions. Redis provides sub-millisecond caching and session storage. Docker ensures consistent deployment across environments.",
         },
       },
       architectureDetails: {
         title: "How It All Works Together",
         step1: {
           title: "Admin creates a license key",
-          description: "Through the Next.js web dashboard, administrators generate license keys with customizable expiration dates and activation limits.",
+          description:
+            "Through the Next.js web dashboard, administrators generate license keys with customizable expiration dates and activation limits.",
         },
         step2: {
           title: "User downloads the desktop client",
-          description: "End users receive their license key and download the C++ Windows client application.",
+          description:
+            "End users receive their license key and download the C++ Windows client application.",
         },
         step3: {
           title: "Client authenticates with hardware binding",
-          description: "The desktop client sends credentials along with a hardware ID (HWID) to the FastAPI backend, which registers and binds the device.",
+          description:
+            "The desktop client sends credentials along with a hardware ID (HWID) to the FastAPI backend, which registers and binds the device.",
         },
         step4: {
           title: "Secure file delivery",
-          description: "The client downloads AES-256-GCM encrypted files, decrypts them in memory using HKDF-derived keys, and validates the license periodically via heartbeats.",
+          description:
+            "The client downloads AES-256-GCM encrypted files, decrypts them in memory using HKDF-derived keys, and validates the license periodically via heartbeats.",
         },
         step5: {
           title: "Real-time monitoring",
-          description: "All actions are logged to PostgreSQL, cached in Redis, and admins can monitor everything in real-time through the dashboard.",
+          description:
+            "All actions are logged to PostgreSQL, cached in Redis, and admins can monitor everything in real-time through the dashboard.",
         },
       },
       authDetails: {
@@ -364,58 +375,71 @@ export const translations = {
           ],
         },
         multiDeviceLabel: "Multi-device Support:",
-        multiDevice: "Users can register up to a configurable number of devices. Each device is tracked independently with nickname, first seen date, and last activity timestamp.",
+        multiDevice:
+          "Users can register up to a configurable number of devices. Each device is tracked independently with nickname, first seen date, and last activity timestamp.",
       },
       encryptionDetails: {
         step1: {
           title: "Server-Side Encryption",
-          description: "Files are encrypted with AES-256-GCM using a master key. The encrypted format includes a 12-byte nonce, variable-length ciphertext, and 16-byte authentication tag.",
+          description:
+            "Files are encrypted with AES-256-GCM using a master key. The encrypted format includes a 12-byte nonce, variable-length ciphertext, and 16-byte authentication tag.",
         },
         step2: {
           title: "HKDF Key Derivation",
-          description: "When a user requests a download, a unique decryption key is derived using HKDF-SHA256 with the user's ID and access token. Keys are derived, not stored—reducing attack surface.",
+          description:
+            "When a user requests a download, a unique decryption key is derived using HKDF-SHA256 with the user's ID and access token. Keys are derived, not stored—reducing attack surface.",
         },
         step3: {
           title: "In-Memory Decryption",
-          description: "The desktop client decrypts files entirely in memory. Plaintext never touches the disk, ensuring stolen encrypted files are useless without valid credentials.",
+          description:
+            "The desktop client decrypts files entirely in memory. Plaintext never touches the disk, ensuring stolen encrypted files are useless without valid credentials.",
         },
         whyMattersLabel: "Why This Matters:",
-        whyMatters: "Each user gets a unique decryption key. Even if an attacker intercepts the encrypted file, they cannot decrypt it without the user's valid access token and user ID.",
+        whyMatters:
+          "Each user gets a unique decryption key. Even if an attacker intercepts the encrypted file, they cannot decrypt it without the user's valid access token and user ID.",
       },
       deploymentDetails: {
         postgres: {
           title: "PostgreSQL",
-          description: "Primary database with persistent volume for data durability. Stores users, licenses, sessions, and audit logs.",
+          description:
+            "Primary database with persistent volume for data durability. Stores users, licenses, sessions, and audit logs.",
         },
         redis: {
           title: "Redis",
-          description: "In-memory cache for session storage, rate limiting counters, and frequently accessed data.",
+          description:
+            "In-memory cache for session storage, rate limiting counters, and frequently accessed data.",
         },
         fastapi: {
           title: "FastAPI Backend",
-          description: "Async Python API server running on Uvicorn with auto-reload in development mode.",
+          description:
+            "Async Python API server running on Uvicorn with auto-reload in development mode.",
         },
         nextjs: {
           title: "Next.js Frontend",
-          description: "React-based dashboard with server-side rendering for optimal performance.",
+          description:
+            "React-based dashboard with server-side rendering for optimal performance.",
         },
         volumesLabel: "Persistent Volumes:",
-        volumes: "postgres_data, redis_data, and file_storage volumes ensure data survives container restarts. All services communicate over an internal Docker network.",
+        volumes:
+          "postgres_data, redis_data, and file_storage volumes ensure data survives container restarts. All services communicate over an internal Docker network.",
       },
       labels: {
         why: "Why:",
       },
       deepDive: {
         title: "Technical Deep Dive",
-        description: "Key implementation details showcasing the security and architecture decisions.",
+        description:
+          "Key implementation details showcasing the security and architecture decisions.",
       },
       challenges: {
         title: "Challenges & Solutions",
-        description: "Complex problems encountered during development and how they were solved.",
+        description:
+          "Complex problems encountered during development and how they were solved.",
       },
       learnings: {
         title: "Key Learnings",
-        description: "Insights gained from building this production-ready system.",
+        description:
+          "Insights gained from building this production-ready system.",
       },
       securityLayers: {
         layer: "Layer",
@@ -459,19 +483,23 @@ export const translations = {
       codeExamples: {
         auth: {
           title: "Dual Authentication System",
-          description: "Supporting both web sessions and desktop JWT tokens with hardware binding",
+          description:
+            "Supporting both web sessions and desktop JWT tokens with hardware binding",
         },
         encryption: {
           title: "AES-256-GCM File Encryption",
-          description: "Server-side file encryption with authenticated encryption",
+          description:
+            "Server-side file encryption with authenticated encryption",
         },
         decryption: {
           title: "In-Memory Decryption (C++)",
-          description: "Files decrypted entirely in memory - plaintext never touches disk",
+          description:
+            "Files decrypted entirely in memory - plaintext never touches disk",
         },
         hwid: {
           title: "Hardware ID Generation",
-          description: "Stable device identification from multiple hardware components",
+          description:
+            "Stable device identification from multiple hardware components",
         },
       },
       challengeLabels: {
@@ -481,40 +509,51 @@ export const translations = {
       challengeItems: {
         tokenRefresh: {
           title: "Concurrent Token Refresh",
-          problem: "Multiple API calls could trigger simultaneous token refreshes, causing race conditions.",
-          solution: "Implemented a request queue that pauses all requests during refresh, then releases them once the new token is available.",
+          problem:
+            "Multiple API calls could trigger simultaneous token refreshes, causing race conditions.",
+          solution:
+            "Implemented a request queue that pauses all requests during refresh, then releases them once the new token is available.",
         },
         session: {
           title: "Cross-Platform Session Management",
-          problem: "Web sessions use cookies, but desktop clients cannot use cookies.",
-          solution: "Implemented parallel authentication systems with a shared session model that handles both session types.",
+          problem:
+            "Web sessions use cookies, but desktop clients cannot use cookies.",
+          solution:
+            "Implemented parallel authentication systems with a shared session model that handles both session types.",
         },
         hwid: {
           title: "Hardware ID Stability",
-          problem: "Some HWID components (like MAC addresses) change frequently, causing false \"new device\" detections.",
-          solution: "Use only stable components (CPU ID, motherboard serial) and implement similarity checking with 70% threshold.",
+          problem:
+            'Some HWID components (like MAC addresses) change frequently, causing false "new device" detections.',
+          solution:
+            "Use only stable components (CPU ID, motherboard serial) and implement similarity checking with 70% threshold.",
         },
       },
       learningItems: {
         security: {
           title: "Security is Architecture",
-          description: "Security isn't something you add at the end—it must be designed in from the start. Every layer needs consideration.",
+          description:
+            "Security isn't something you add at the end—it must be designed in from the start. Every layer needs consideration.",
         },
         async: {
           title: "Async is Essential",
-          description: "For any system handling concurrent users, blocking I/O is a bottleneck. 100% async architecture eliminates this.",
+          description:
+            "For any system handling concurrent users, blocking I/O is a bottleneck. 100% async architecture eliminates this.",
         },
         typeSafety: {
           title: "Type Safety Saves Time",
-          description: "The hours spent defining types are repaid in fewer bugs and easier refactoring. TypeScript + Pydantic + Zod.",
+          description:
+            "The hours spent defining types are repaid in fewer bugs and easier refactoring. TypeScript + Pydantic + Zod.",
         },
         crossPlatform: {
           title: "Cross-Platform is Hard",
-          description: "Web and desktop have fundamentally different models. Abstracting the differences requires careful design.",
+          description:
+            "Web and desktop have fundamentally different models. Abstracting the differences requires careful design.",
         },
         monitoring: {
           title: "Monitoring is Not Optional",
-          description: "Without comprehensive logs, debugging production issues is nearly impossible. Log everything.",
+          description:
+            "Without comprehensive logs, debugging production issues is nearly impossible. Log everything.",
         },
       },
     },
@@ -576,7 +615,8 @@ export const translations = {
       items: {
         newspaper: {
           title: "신문에 소개됨",
-          description: "George Mason University 신문사와의 인터뷰 - 웹 브라우저 익스텐션(Chrome, Firefox, Edge)에 대해",
+          description:
+            "George Mason University 신문사와의 인터뷰 - 웹 브라우저 익스텐션(Chrome, Firefox, Edge)에 대해",
         },
         bestFinancial: {
           title: "최우수 금융 해킹",
@@ -701,7 +741,7 @@ export const translations = {
           ],
         },
         sciencelogic: {
-          title: "소프트웨어 엔지니어",
+          title: "Associate 엔지니어",
           description:
             "엔터프라이즈 모니터링 플랫폼의 대시보드 기능을 개발하고 개선했습니다.",
           highlights: [
@@ -826,42 +866,51 @@ export const translations = {
         whyTitle: "왜 이 기술들을 선택했나?",
         backend: {
           title: "백엔드: Python + FastAPI",
-          description: "FastAPI의 비동기 우선 설계는 동시 API 요청을 효율적으로 처리합니다. Pydantic과 함께 타입 힌트는 자동 검증과 문서화를 제공합니다. SQLAlchemy 2.0의 비동기 지원은 논블로킹 데이터베이스 작업을 보장합니다.",
+          description:
+            "FastAPI의 비동기 우선 설계는 동시 API 요청을 효율적으로 처리합니다. Pydantic과 함께 타입 힌트는 자동 검증과 문서화를 제공합니다. SQLAlchemy 2.0의 비동기 지원은 논블로킹 데이터베이스 작업을 보장합니다.",
         },
         frontend: {
           title: "프론트엔드: Next.js 14 + TypeScript",
-          description: "App Router는 최적의 성능을 위한 서버 컴포넌트를 가능하게 합니다. TypeScript는 컴파일 시점에 오류를 잡아냅니다. TanStack Query는 자동 캐싱과 리페칭으로 서버 상태를 처리합니다.",
+          description:
+            "App Router는 최적의 성능을 위한 서버 컴포넌트를 가능하게 합니다. TypeScript는 컴파일 시점에 오류를 잡아냅니다. TanStack Query는 자동 캐싱과 리페칭으로 서버 상태를 처리합니다.",
         },
         desktop: {
           title: "데스크톱: C++17 with DirectX/ImGui",
-          description: "암호화 연산을 위한 네이티브 성능. HWID 생성을 위한 직접적인 하드웨어 접근. ImGui는 최소한의 오버헤드로 즉각적인 렌더링을 제공합니다.",
+          description:
+            "암호화 연산을 위한 네이티브 성능. HWID 생성을 위한 직접적인 하드웨어 접근. ImGui는 최소한의 오버헤드로 즉각적인 렌더링을 제공합니다.",
         },
         infrastructure: {
           title: "인프라: PostgreSQL + Redis + Docker",
-          description: "PostgreSQL은 복잡한 쿼리와 ACID 트랜잭션을 처리합니다. Redis는 밀리초 이하의 캐싱과 세션 저장소를 제공합니다. Docker는 환경 간 일관된 배포를 보장합니다.",
+          description:
+            "PostgreSQL은 복잡한 쿼리와 ACID 트랜잭션을 처리합니다. Redis는 밀리초 이하의 캐싱과 세션 저장소를 제공합니다. Docker는 환경 간 일관된 배포를 보장합니다.",
         },
       },
       architectureDetails: {
         title: "전체 동작 방식",
         step1: {
           title: "관리자가 라이선스 키 생성",
-          description: "Next.js 웹 대시보드를 통해 관리자는 맞춤형 만료 날짜와 활성화 제한이 있는 라이선스 키를 생성합니다.",
+          description:
+            "Next.js 웹 대시보드를 통해 관리자는 맞춤형 만료 날짜와 활성화 제한이 있는 라이선스 키를 생성합니다.",
         },
         step2: {
           title: "사용자가 데스크톱 클라이언트 다운로드",
-          description: "최종 사용자는 라이선스 키를 받고 C++ Windows 클라이언트 애플리케이션을 다운로드합니다.",
+          description:
+            "최종 사용자는 라이선스 키를 받고 C++ Windows 클라이언트 애플리케이션을 다운로드합니다.",
         },
         step3: {
           title: "클라이언트가 하드웨어 바인딩으로 인증",
-          description: "데스크톱 클라이언트는 하드웨어 ID(HWID)와 함께 자격 증명을 FastAPI 백엔드로 전송하고, 백엔드는 기기를 등록하고 바인딩합니다.",
+          description:
+            "데스크톱 클라이언트는 하드웨어 ID(HWID)와 함께 자격 증명을 FastAPI 백엔드로 전송하고, 백엔드는 기기를 등록하고 바인딩합니다.",
         },
         step4: {
           title: "보안 파일 배달",
-          description: "클라이언트는 AES-256-GCM 암호화된 파일을 다운로드하고, HKDF 파생 키를 사용해 메모리에서 복호화하며, 하트비트를 통해 주기적으로 라이선스를 검증합니다.",
+          description:
+            "클라이언트는 AES-256-GCM 암호화된 파일을 다운로드하고, HKDF 파생 키를 사용해 메모리에서 복호화하며, 하트비트를 통해 주기적으로 라이선스를 검증합니다.",
         },
         step5: {
           title: "실시간 모니터링",
-          description: "모든 작업은 PostgreSQL에 로깅되고, Redis에 캐싱되며, 관리자는 대시보드를 통해 모든 것을 실시간으로 모니터링할 수 있습니다.",
+          description:
+            "모든 작업은 PostgreSQL에 로깅되고, Redis에 캐싱되며, 관리자는 대시보드를 통해 모든 것을 실시간으로 모니터링할 수 있습니다.",
         },
       },
       authDetails: {
@@ -885,50 +934,61 @@ export const translations = {
           ],
         },
         multiDeviceLabel: "다중 기기 지원:",
-        multiDevice: "사용자는 설정 가능한 수만큼의 기기를 등록할 수 있습니다. 각 기기는 닉네임, 처음 확인 날짜, 마지막 활동 타임스탬프와 함께 독립적으로 추적됩니다.",
+        multiDevice:
+          "사용자는 설정 가능한 수만큼의 기기를 등록할 수 있습니다. 각 기기는 닉네임, 처음 확인 날짜, 마지막 활동 타임스탬프와 함께 독립적으로 추적됩니다.",
       },
       encryptionDetails: {
         step1: {
           title: "서버 측 암호화",
-          description: "파일은 마스터 키를 사용하여 AES-256-GCM으로 암호화됩니다. 암호화된 형식에는 12바이트 논스, 가변 길이 암호문, 16바이트 인증 태그가 포함됩니다.",
+          description:
+            "파일은 마스터 키를 사용하여 AES-256-GCM으로 암호화됩니다. 암호화된 형식에는 12바이트 논스, 가변 길이 암호문, 16바이트 인증 태그가 포함됩니다.",
         },
         step2: {
           title: "HKDF 키 파생",
-          description: "사용자가 다운로드를 요청하면 사용자 ID와 액세스 토큰을 사용하여 HKDF-SHA256으로 고유한 복호화 키가 파생됩니다. 키는 저장되지 않고 파생되어 공격 표면을 줄입니다.",
+          description:
+            "사용자가 다운로드를 요청하면 사용자 ID와 액세스 토큰을 사용하여 HKDF-SHA256으로 고유한 복호화 키가 파생됩니다. 키는 저장되지 않고 파생되어 공격 표면을 줄입니다.",
         },
         step3: {
           title: "인메모리 복호화",
-          description: "데스크톱 클라이언트는 파일을 완전히 메모리에서 복호화합니다. 평문은 디스크에 닿지 않아, 도난당한 암호화 파일은 유효한 자격 증명 없이는 쓸모가 없습니다.",
+          description:
+            "데스크톱 클라이언트는 파일을 완전히 메모리에서 복호화합니다. 평문은 디스크에 닿지 않아, 도난당한 암호화 파일은 유효한 자격 증명 없이는 쓸모가 없습니다.",
         },
         whyMattersLabel: "왜 중요한가:",
-        whyMatters: "각 사용자는 고유한 복호화 키를 받습니다. 공격자가 암호화된 파일을 가로채더라도 사용자의 유효한 액세스 토큰과 사용자 ID 없이는 복호화할 수 없습니다.",
+        whyMatters:
+          "각 사용자는 고유한 복호화 키를 받습니다. 공격자가 암호화된 파일을 가로채더라도 사용자의 유효한 액세스 토큰과 사용자 ID 없이는 복호화할 수 없습니다.",
       },
       deploymentDetails: {
         postgres: {
           title: "PostgreSQL",
-          description: "데이터 내구성을 위한 영구 볼륨이 있는 기본 데이터베이스. 사용자, 라이선스, 세션, 감사 로그를 저장합니다.",
+          description:
+            "데이터 내구성을 위한 영구 볼륨이 있는 기본 데이터베이스. 사용자, 라이선스, 세션, 감사 로그를 저장합니다.",
         },
         redis: {
           title: "Redis",
-          description: "세션 저장, 속도 제한 카운터, 자주 접근하는 데이터를 위한 인메모리 캐시.",
+          description:
+            "세션 저장, 속도 제한 카운터, 자주 접근하는 데이터를 위한 인메모리 캐시.",
         },
         fastapi: {
           title: "FastAPI 백엔드",
-          description: "개발 모드에서 자동 리로드가 있는 Uvicorn에서 실행되는 비동기 Python API 서버.",
+          description:
+            "개발 모드에서 자동 리로드가 있는 Uvicorn에서 실행되는 비동기 Python API 서버.",
         },
         nextjs: {
           title: "Next.js 프론트엔드",
-          description: "최적의 성능을 위한 서버 사이드 렌더링이 있는 React 기반 대시보드.",
+          description:
+            "최적의 성능을 위한 서버 사이드 렌더링이 있는 React 기반 대시보드.",
         },
         volumesLabel: "영구 볼륨:",
-        volumes: "postgres_data, redis_data, file_storage 볼륨은 컨테이너 재시작 시에도 데이터를 보존합니다. 모든 서비스는 내부 Docker 네트워크를 통해 통신합니다.",
+        volumes:
+          "postgres_data, redis_data, file_storage 볼륨은 컨테이너 재시작 시에도 데이터를 보존합니다. 모든 서비스는 내부 Docker 네트워크를 통해 통신합니다.",
       },
       labels: {
         why: "이유:",
       },
       deepDive: {
         title: "기술 심층 분석",
-        description: "보안 및 아키텍처 결정을 보여주는 핵심 구현 세부 사항입니다.",
+        description:
+          "보안 및 아키텍처 결정을 보여주는 핵심 구현 세부 사항입니다.",
       },
       challenges: {
         title: "도전과 해결",
@@ -980,7 +1040,8 @@ export const translations = {
       codeExamples: {
         auth: {
           title: "이중 인증 시스템",
-          description: "웹 세션과 데스크톱 JWT 토큰을 하드웨어 바인딩과 함께 지원",
+          description:
+            "웹 세션과 데스크톱 JWT 토큰을 하드웨어 바인딩과 함께 지원",
         },
         encryption: {
           title: "AES-256-GCM 파일 암호화",
@@ -988,7 +1049,8 @@ export const translations = {
         },
         decryption: {
           title: "인메모리 복호화 (C++)",
-          description: "파일을 완전히 메모리에서 복호화 - 평문이 디스크에 닿지 않음",
+          description:
+            "파일을 완전히 메모리에서 복호화 - 평문이 디스크에 닿지 않음",
         },
         hwid: {
           title: "하드웨어 ID 생성",
@@ -1002,40 +1064,51 @@ export const translations = {
       challengeItems: {
         tokenRefresh: {
           title: "동시 토큰 갱신",
-          problem: "여러 API 호출이 동시에 토큰 갱신을 트리거하여 경쟁 조건을 발생시킬 수 있습니다.",
-          solution: "갱신 중 모든 요청을 일시 중지하고 새 토큰이 준비되면 해제하는 요청 큐를 구현했습니다.",
+          problem:
+            "여러 API 호출이 동시에 토큰 갱신을 트리거하여 경쟁 조건을 발생시킬 수 있습니다.",
+          solution:
+            "갱신 중 모든 요청을 일시 중지하고 새 토큰이 준비되면 해제하는 요청 큐를 구현했습니다.",
         },
         session: {
           title: "크로스 플랫폼 세션 관리",
-          problem: "웹 세션은 쿠키를 사용하지만 데스크톱 클라이언트는 쿠키를 사용할 수 없습니다.",
-          solution: "두 세션 유형을 모두 처리하는 공유 세션 모델로 병렬 인증 시스템을 구현했습니다.",
+          problem:
+            "웹 세션은 쿠키를 사용하지만 데스크톱 클라이언트는 쿠키를 사용할 수 없습니다.",
+          solution:
+            "두 세션 유형을 모두 처리하는 공유 세션 모델로 병렬 인증 시스템을 구현했습니다.",
         },
         hwid: {
           title: "하드웨어 ID 안정성",
-          problem: "일부 HWID 구성 요소(예: MAC 주소)는 자주 변경되어 잘못된 \"새 기기\" 감지를 발생시킵니다.",
-          solution: "안정적인 구성 요소(CPU ID, 메인보드 시리얼)만 사용하고 70% 임계값으로 유사도 검사를 구현합니다.",
+          problem:
+            '일부 HWID 구성 요소(예: MAC 주소)는 자주 변경되어 잘못된 "새 기기" 감지를 발생시킵니다.',
+          solution:
+            "안정적인 구성 요소(CPU ID, 메인보드 시리얼)만 사용하고 70% 임계값으로 유사도 검사를 구현합니다.",
         },
       },
       learningItems: {
         security: {
           title: "보안은 아키텍처다",
-          description: "보안은 마지막에 추가하는 것이 아니라 처음부터 설계에 포함되어야 합니다. 모든 레이어에 대한 고려가 필요합니다.",
+          description:
+            "보안은 마지막에 추가하는 것이 아니라 처음부터 설계에 포함되어야 합니다. 모든 레이어에 대한 고려가 필요합니다.",
         },
         async: {
           title: "비동기는 필수다",
-          description: "동시 사용자를 처리하는 모든 시스템에서 블로킹 I/O는 병목입니다. 100% 비동기 아키텍처가 이를 해결합니다.",
+          description:
+            "동시 사용자를 처리하는 모든 시스템에서 블로킹 I/O는 병목입니다. 100% 비동기 아키텍처가 이를 해결합니다.",
         },
         typeSafety: {
           title: "타입 안전성이 시간을 절약한다",
-          description: "타입 정의에 투자한 시간은 더 적은 버그와 쉬운 리팩토링으로 보답받습니다. TypeScript + Pydantic + Zod.",
+          description:
+            "타입 정의에 투자한 시간은 더 적은 버그와 쉬운 리팩토링으로 보답받습니다. TypeScript + Pydantic + Zod.",
         },
         crossPlatform: {
           title: "크로스 플랫폼은 어렵다",
-          description: "웹과 데스크톱은 근본적으로 다른 모델을 가지고 있습니다. 차이점을 추상화하려면 신중한 설계가 필요합니다.",
+          description:
+            "웹과 데스크톱은 근본적으로 다른 모델을 가지고 있습니다. 차이점을 추상화하려면 신중한 설계가 필요합니다.",
         },
         monitoring: {
           title: "모니터링은 선택이 아니다",
-          description: "포괄적인 로그 없이는 프로덕션 문제 디버깅이 거의 불가능합니다. 모든 것을 로깅하세요.",
+          description:
+            "포괄적인 로그 없이는 프로덕션 문제 디버깅이 거의 불가능합니다. 모든 것을 로깅하세요.",
         },
       },
     },
