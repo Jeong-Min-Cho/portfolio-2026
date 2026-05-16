@@ -109,10 +109,6 @@ export const translations = {
           description:
             "A desktop application for installing Korean language patches for Black Desert Online. Features font installation, patch management, and a user-friendly installer interface.",
         },
-        loveLetter: {
-          description:
-            "An interactive and fun web experience built with vanilla technologies. Features playful animations and engaging interactions without any framework overhead.",
-        },
         unicodeEscaper: {
           description:
             "A lightweight npm package for encoding and decoding Unicode escape sequences. Supports multiple formats including \\uXXXX, \\u{X}, \\xNN, HTML entities, and U+XXXX notation.",
@@ -666,10 +662,6 @@ export const translations = {
         bdoKorean: {
           description:
             "검은사막 온라인의 한국어 패치 설치를 위한 데스크톱 애플리케이션입니다. 폰트 설치, 패치 관리, 사용자 친화적인 인터페이스를 제공합니다.",
-        },
-        loveLetter: {
-          description:
-            "바닐라 기술로 만든 인터랙티브하고 재미있는 웹 경험입니다. 프레임워크 없이 사랑스러운 러브레터 애니메이션과 상호작용을 구현했습니다.",
         },
         unicodeEscaper: {
           description:
