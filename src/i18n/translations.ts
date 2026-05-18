@@ -420,7 +420,7 @@ export const translations = {
           "postgres_data, redis_data, and file_storage volumes ensure data survives container restarts. All services communicate over an internal Docker network.",
       },
       labels: {
-        why: "Why:",
+        why: "Why:  ",
       },
       deepDive: {
         title: "Technical Deep Dive",
