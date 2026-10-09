@@ -39,7 +39,6 @@ export const translations = {
         "I graduated Magna Cum Laude from George Mason University with a BS in Computer Science. My experience spans from building dashboard features at ScienceLogic to developing fullstack SaaS platforms with secure authentication systems.",
       paragraph3:
         "I'm passionate about clean architecture, CI/CD automation, and building products that solve real problems. Whether it's designing RESTful APIs, containerizing services with Docker, or crafting responsive UIs, I focus on delivering high-quality, maintainable code.",
-      downloadResume: "Download Resume",
       stats: {
         experience: "Years Experience",
         companies: "Companies",
@@ -146,10 +145,20 @@ export const translations = {
         description: "GPA: 3.8/4.0 - Dean's List | Graduated Magna Cum Laude",
       },
       items: {
+        forefront: {
+          title: "Software Developer",
+          description:
+            "Building customer-facing applications for an enterprise content management consultancy focused on OpenText Documentum and records management.",
+          highlights: [
+            "Build customer-facing web applications with Angular and TypeScript",
+            "Develop backend services in Java, Spring Boot, and C# that support enterprise content and records workflows",
+            "Integrate OpenText Documentum and deliver containerized services with Docker, including native C++ components",
+          ],
+        },
         founder: {
           title: "Founder & Fullstack Software Engineer",
           description:
-            "Building a fullstack SaaS platform with secure authentication and desktop client application.",
+            "Built a fullstack SaaS platform with secure authentication and a desktop client application.",
           highlights: [
             "Built fullstack SaaS platform with Next.js 14, TypeScript frontend backed by FastAPI and PostgreSQL",
             "Developed secure license management system with HWID binding, JWT authentication, and AES-256 encryption",
@@ -166,18 +175,6 @@ export const translations = {
             "Troubleshot and resolved network issues under time-sensitive conditions",
           ],
         },
-        ustigers: {
-          title: "Fullstack Software Engineer",
-          description:
-            "Developed fullstack web applications with React and Spring Boot in an Agile environment.",
-          highlights: [
-            "Developed responsive user interfaces with React.js and JavaScript, improving application usability and performance",
-            "Designed and built RESTful APIs using Java and Spring Boot to enable seamless frontend-backend communication",
-            "Deployed and managed applications on AWS, leveraging services such as EC2, S3, and RDS for scalability",
-            "Automated build and deployment pipelines with Jenkins and Docker, streamlining the CI/CD workflow",
-            "Collaborated with cross-functional teams in an Agile environment to deliver features on schedule",
-          ],
-        },
         sciencelogic: {
           title: "Associate Engineer",
           description:
@@ -187,15 +184,6 @@ export const translations = {
             "Wrote unit and integration tests that improved code reliability and reduced regression issues",
             "Maintained and updated legacy PHP systems while supporting containerized deployments with Docker",
             "Identified and resolved bugs across the dashboard, improving overall user experience and system stability",
-          ],
-        },
-        sdlcJunior: {
-          title: "Junior Software Engineer",
-          description:
-            "First tenure developing responsive user interfaces and backend APIs for enterprise clients.",
-          highlights: [
-            "Developed responsive user interfaces with React.js and JavaScript, improving usability and performance",
-            "Designed and built RESTful APIs using Java and Spring Boot for seamless frontend-backend communication",
           ],
         },
       },
@@ -595,7 +583,6 @@ export const translations = {
         "미국 George Mason University에서 컴퓨터 과학 학사 학위를 Magna Cum Laude로 졸업했습니다. 스타트업, 중견기업에서 대시보드 기능 개발부터 보안 인증 시스템을 갖춘 풀스택 SaaS 플랫폼 개발까지 다양한 경험을 쌓았습니다.",
       paragraph3:
         "클린 아키텍처, CI/CD 자동화, 그리고 실제 문제를 해결하는 제품 개발에 열정을 가지고 있습니다. RESTful API 설계, Docker를 이용한 서비스 컨테이너화, 반응형 UI 개발 등 고품질의 유지보수 가능한 코드를 제공하는 데 집중합니다.",
-      downloadResume: "이력서 다운로드",
       stats: {
         experience: "년 경력",
         companies: "개 회사",
@@ -700,10 +687,20 @@ export const translations = {
         description: "학점: 3.8/4.0 - 우등생 명단 | Magna Cum Laude 졸업",
       },
       items: {
+        forefront: {
+          title: "소프트웨어 개발자",
+          description:
+            "OpenText Documentum과 기록 관리에 특화된 엔터프라이즈 콘텐츠 관리 컨설팅 회사에서 고객용 애플리케이션을 개발하고 있습니다.",
+          highlights: [
+            "Angular와 TypeScript로 고객용 웹 애플리케이션 개발",
+            "Java, Spring Boot, C#으로 엔터프라이즈 콘텐츠 및 기록 관리 워크플로우를 지원하는 백엔드 서비스 개발",
+            "OpenText Documentum을 연동하고 Docker로 서비스를 컨테이너화하며 C++ 네이티브 컴포넌트를 포함",
+          ],
+        },
         founder: {
           title: "풀스택 소프트웨어 엔지니어",
           description:
-            "보안 인증 시스템과 데스크톱 클라이언트를 갖춘 풀스택 SaaS 플랫폼을 개발하고 있습니다.",
+            "보안 인증 시스템과 데스크톱 클라이언트를 갖춘 풀스택 SaaS 플랫폼을 개발했습니다.",
           highlights: [
             "Next.js 14, TypeScript 프론트엔드와 FastAPI, PostgreSQL 백엔드로 풀스택 SaaS 플랫폼 구축",
             "HWID 바인딩, JWT 인증, AES-256 암호화를 적용한 보안 라이선스 관리 시스템 개발",
@@ -720,18 +717,6 @@ export const translations = {
             "시간에 민감한 상황에서 네트워크 문제 해결 및 장애 조치",
           ],
         },
-        ustigers: {
-          title: "풀스택 소프트웨어 엔지니어",
-          description:
-            "Agile 환경에서 React와 Spring Boot를 활용한 풀스택 웹 애플리케이션 개발.",
-          highlights: [
-            "React.js와 JavaScript로 반응형 UI 개발, 애플리케이션 사용성 및 성능 향상",
-            "Java와 Spring Boot를 사용하여 프론트엔드-백엔드 원활한 통신을 위한 RESTful API 설계 및 구축",
-            "AWS EC2, S3, RDS 등 서비스를 활용한 애플리케이션 배포 및 관리로 확장성 확보",
-            "Jenkins와 Docker로 빌드 및 배포 파이프라인 자동화, CI/CD 워크플로우 간소화",
-            "Agile 환경에서 여러 팀과 협업하여 일정에 맞춰 기능 개발",
-          ],
-        },
         sciencelogic: {
           title: "Associate 엔지니어",
           description:
@@ -741,15 +726,6 @@ export const translations = {
             "유닛 테스트 및 통합 테스트 작성으로 코드 신뢰성 향상 및 회귀 문제 감소",
             "레거시 PHP 시스템 유지보수 및 업데이트, Docker 컨테이너 배포 지원",
             "대시보드 전반의 버그 식별 및 해결, 전반적인 사용자 경험 및 시스템 안정성 개선",
-          ],
-        },
-        sdlcJunior: {
-          title: "주니어 소프트웨어 엔지니어",
-          description:
-            "엔터프라이즈 클라이언트를 위한 반응형 UI와 백엔드 API를 개발했습니다.",
-          highlights: [
-            "React.js와 JavaScript로 반응형 UI 개발, 사용성 및 성능 개선",
-            "Java와 Spring Boot로 프론트엔드-백엔드 원활한 통신을 위한 RESTful API 설계 및 구축",
           ],
         },
       },
